@@ -4,3 +4,5 @@ java-redis/\.classpath
 java-redis/\.project
 
 java-redis/\.settings/
+*.classpath
+*.project
