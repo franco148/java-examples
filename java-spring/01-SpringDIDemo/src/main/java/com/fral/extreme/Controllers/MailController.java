@@ -3,6 +3,7 @@ package com.fral.extreme.Controllers;
 import com.fral.extreme.Mail.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,9 @@ public class MailController {
 
     //@Autowired
     private MailSender mailSender;
+
+    @Value("${app.name}")
+    private String appName;
 
 
     /**
@@ -48,6 +52,6 @@ public class MailController {
 
         mailSender.send("franck_ral@hotmail.com", "A test mail", "Body of the test mail");
 
-        return "Sending mail";
+        return "Sending mail " + appName;
     }
 }
