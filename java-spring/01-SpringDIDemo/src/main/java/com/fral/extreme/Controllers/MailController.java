@@ -39,8 +39,8 @@ public class MailController {
      * There are another annotations that help us to work with Dependency Injection like @Inject and @Resource
      * */
     @Autowired
-    public void setMailSender(MailSender mailSender) {
-        this.mailSender = mailSender;
+    public void setMailSender(MailSender mockMailSender) {
+        this.mailSender = mockMailSender;
     }
 
     @RequestMapping("/mail")

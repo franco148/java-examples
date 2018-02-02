@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-@Component
-@Qualifier("smtpMail")
+//@Component
+//@Qualifier("smtpMail")
 public class SmtpMailSender implements MailSender {
 
     private static Log log = LogFactory.getLog(MockMailSender.class);
