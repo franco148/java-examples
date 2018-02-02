@@ -1,5 +1,6 @@
 package com.fral.extreme.Mail;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,11 +14,12 @@ import org.springframework.context.annotation.Profile;
 public class MailConfig {
 
     /**
-     * We require MockMailSender just in DEV environment
+     * We require MockMailSender just in DEV environment when PROFILE.ACTIVE in application.properties file.
      * @return
      */
     @Bean
-    @Profile("dev")
+    //@Profile("dev")
+    @ConditionalOnProperty(name = "spring.mail.host", havingValue = "foo", matchIfMissing = true)
     public MailSender mockMailSender() {
         return new MockMailSender();
     }
@@ -28,7 +30,8 @@ public class MailConfig {
      */
     @Bean
     //@Profile("prod")
-    @Profile("!dev")
+    //@Profile("!dev")
+    @ConditionalOnProperty("spring.mail.host")
     public MailSender smtpMailSender() {
         return new SmtpMailSender();
     }
