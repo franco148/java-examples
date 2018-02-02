@@ -28,6 +28,19 @@ public class MailConfig {
 //    private JavaMailSender javaMailSender;
 
     /**
+     * When the class is using @Configuration annotation, then demoBean is called only once even
+     * if you call specifically this method from some of the other ones.
+     *
+     * So If class uses @Component, then you will see in the log that this methods is called more
+     * than once.
+     * @return
+     */
+    @Bean
+    public DemoBean demoBean() {
+        return new DemoBean();
+    }
+
+    /**
      * We require MockMailSender just in DEV environment when PROFILE.ACTIVE in application.properties file.
      * @return
      */
