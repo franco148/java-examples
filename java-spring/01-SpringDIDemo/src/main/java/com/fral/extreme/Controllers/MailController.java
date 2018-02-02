@@ -2,6 +2,7 @@ package com.fral.extreme.Controllers;
 
 import com.fral.extreme.Mail.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,10 +29,18 @@ public class MailController {
      * @Component("smtp")
      * public class SmtpMailSender {}
      *
+     * 3. Using @Primary annotation. So this is going to take for Dependency Injection
+     *
+     * 4. Having a @Qualifier annotation
+     * @Autowired
+     * public void setMailSender(@Qualifier("smtpMail") MailSender mailSender) {}
+     *
+     *
+     * There are another annotations that help us to work with Dependency Injection like @Inject and @Resource
      * */
     @Autowired
-    public void setMailSender(MailSender smtpMailSender) {
-        this.mailSender = smtpMailSender;
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
     }
 
     @RequestMapping("/mail")
