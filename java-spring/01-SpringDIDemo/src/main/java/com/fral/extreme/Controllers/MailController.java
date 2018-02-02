@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.MessagingException;
+
 @RestController
 public class MailController {
 
@@ -48,9 +50,9 @@ public class MailController {
     }
 
     @RequestMapping("/mail")
-    public String mail() {
+    public String mail() throws MessagingException {
 
-        mailSender.send("franck_ral@hotmail.com", "A test mail", "Body of the test mail");
+        mailSender.send("franco.robert.fral@gmail.com", "A test mail", "Body of the test mail");
 
         return "Sending mail " + appName;
     }

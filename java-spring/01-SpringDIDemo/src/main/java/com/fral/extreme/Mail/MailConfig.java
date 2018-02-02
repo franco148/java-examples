@@ -1,9 +1,11 @@
 package com.fral.extreme.Mail;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.mail.javamail.JavaMailSender;
 
 /**
  * In case that we may not have an annotation in MockMailSender but
@@ -12,6 +14,18 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 public class MailConfig {
+
+    /**
+     * Or instead of doing this, since the methods already have @Bean annotation
+     * we can send javaMailSender as parameter, so it is going to be injected automatically.
+     * like so:
+     *
+     * @Bean
+     * @ConditionalOnProperty("spring.mail.host")
+     * public MailSender smtpMailSender(JavaMailSender javaMailSender) {}
+     */
+//    @Autowired
+//    private JavaMailSender javaMailSender;
 
     /**
      * We require MockMailSender just in DEV environment when PROFILE.ACTIVE in application.properties file.
@@ -32,7 +46,7 @@ public class MailConfig {
     //@Profile("prod")
     //@Profile("!dev")
     @ConditionalOnProperty("spring.mail.host")
-    public MailSender smtpMailSender() {
-        return new SmtpMailSender();
+    public MailSender smtpMailSender(JavaMailSender javaMailSender) {
+        return new SmtpMailSender(javaMailSender);
     }
 }
