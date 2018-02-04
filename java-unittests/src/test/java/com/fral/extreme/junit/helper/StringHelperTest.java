@@ -1,7 +1,11 @@
 package com.fral.extreme.junit.helper;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import com.fral.extreme.junit.helper.StringHelper;
 
@@ -11,9 +15,15 @@ import com.fral.extreme.junit.helper.StringHelper;
  * @author Franco
  *
  */
-class StringHelperTest {
 
-	StringHelper helper = new StringHelper();
+public class StringHelperTest {
+
+	StringHelper helper;
+	
+	@Before
+	public void before( ) {
+		helper = new StringHelper();
+	}
 	
 	/**
 	 * As a good practice for names we need to call the functionality name + the condition
