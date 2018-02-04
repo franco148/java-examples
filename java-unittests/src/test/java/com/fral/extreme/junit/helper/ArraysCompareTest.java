@@ -9,7 +9,6 @@ import org.junit.Test;
 public class ArraysCompareTest {
 	
 	//Arrays.sort
-
 	@Test
 	public void testArraySort_RandomArray() {
 		int[] numbers = {12, 3, 4, 1};
@@ -19,6 +18,13 @@ public class ArraysCompareTest {
 		
 		assertArrayEquals(expected, numbers);
 		
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testArraySort_NullArray() {
+		int[] numbers = null;
+				
+		Arrays.sort(numbers);		
 	}
 
 }
