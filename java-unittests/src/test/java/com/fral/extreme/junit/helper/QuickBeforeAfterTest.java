@@ -1,5 +1,6 @@
 package com.fral.extreme.junit.helper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,5 +21,21 @@ public class QuickBeforeAfterTest {
 	public void test2() {
 		System.out.println("Test2 executed");
 	}
+	
+	@After
+	public void teardown() {
+		System.out.println("After test");
+	}
 
 }
+/**
+ * the result  of the test execution
+ * 
+Before Test
+Test1 executed
+After test
+Before Test
+Test2 executed
+After test
+ 
+ */
