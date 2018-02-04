@@ -18,6 +18,11 @@ public class StringHelper {
 				+ stringMinusFirst2Chars;
 	}
 
+	/**
+	 * ABCD => false;  ABAB => true;  AB => true;  A => false
+	 * @param str
+	 * @return
+	 */
 	public boolean areFirstAndLastTwoCharactersTheSame(String str) {
 
 		if (str.length() <= 1)
@@ -31,5 +36,4 @@ public class StringHelper {
 
 		return first2Chars.equals(last2Chars);
 	}
-
 }
