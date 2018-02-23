@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -68,6 +71,27 @@ public class TodoBusinessImplMockTest {
 		
 		//Then		
 		assertThat(filteredTodos.size(), is(2));
+	}
+	
+	@Test
+	public void testRetrieveTodosRelatedToSpring_usingBDD2() {
+		//Given
+		TodoService todoServiceMock = mock(TodoService.class);
+		List<String> todos = Arrays.asList("Learn Spring MVC", "Learn Spring", "Learn to Dance");
+		//when(todoServiceMock.retrieveTodos("Dummy")).thenReturn(todos);
+		given(todoServiceMock.retrieveTodos("Dummy")).willReturn(todos);
+				
+		TodoBusinessImpl todoBusinessImpl = new TodoBusinessImpl(todoServiceMock);
+		
+		//When
+		todoBusinessImpl.deleteTodosNotRelatedToSpring("Dummy");
+		
+		//Then: Verifying that deleteTodo method has called in TodoService with "Learn to Dance" parameter.		
+		verify(todoServiceMock).deleteTodo("Learn to Dance");
+		//verifying how many times is called the method
+		verify(todoServiceMock, times(1)).deleteTodo("Learn to Dance");
+		//verifying that a method never is called when:
+		verify(todoServiceMock, never()).deleteTodo("Learn Spring MVC");
 	}
 	
 }
