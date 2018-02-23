@@ -13,12 +13,15 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.fral.extreme.mockito.data.api.TodoService;
@@ -31,13 +34,20 @@ import com.fral.extreme.mockito.data.stub.TodoServiceStub;
  * Unlike Stubs, mocks can be dynamically created from code - at runtime.
  * Mocks offer more functionality than stubbing.
  * You can verify method calls and a lot of other things.
+ *  
  * 
  * @author Franco
  *
  */
 
-@RunWith(MockitoJUnitRunner.class)
+//It is not possible to use two runners. For this we need to use a JUnit Rule.
+//@RunWith(MockitoJUnitRunner.class)
 public class TodoBusinessImplMockitoInjectMocksTest {
+	
+	//We can have multiple rules.
+	//They run before and after the tests to ensure that everything is initialized properly.
+	@Rule
+	public MockitoRule mockitoRule = MockitoJUnit.rule();
 	
 	@Mock
 	TodoService todoServiceMock;
