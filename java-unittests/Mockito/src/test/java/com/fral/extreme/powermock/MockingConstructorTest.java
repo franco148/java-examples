@@ -57,5 +57,15 @@ public class MockingConstructorTest {
 		assertEquals(10, size);
 		
 	}
+	
+	/**
+	 * Good Unit Tests = Basics = Readable =  Fails only when there are real logic failures
+	 * 
+	 * <Method><NameOfScenario><Operation>
+	 * GoodName: saveChangedProducts_ProductInScreenAndDatabase_IsUpdated
+	 * GoodName: saveChangedProducts_ProductInScreenAndNotInDatabase_ProductIsInserted
+	 * 
+	 * BDD format is much more understandable. It means a readable test.
+	 */
 
 }
