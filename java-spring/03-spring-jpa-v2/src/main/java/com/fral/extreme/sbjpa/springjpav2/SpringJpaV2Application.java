@@ -10,6 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * CommandLineRunner: the implementation is lunch as soon as the application is ready.
+ *
+ * Repos:
+ * - HibernateJPAStepByStep
+ *
  */
 @SpringBootApplication
 public class SpringJpaV2Application implements CommandLineRunner {
@@ -26,5 +30,6 @@ public class SpringJpaV2Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		logger.info("All users -> {}", dao.findAll());
+		logger.info("Users id 1003 -> {}", dao.findById(1003));
 	}
 }
