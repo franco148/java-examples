@@ -4,8 +4,11 @@ import com.fral.extreme.sbjpa.springjpav2.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -20,9 +23,31 @@ public class PersonJdbcDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    /**
+     * We need the following for custom Row Mapper
+     *
+     */
+    class PersonRowMapper implements RowMapper<Person> {
+
+        @Override
+        public Person mapRow(ResultSet resultSet, int i) throws SQLException {
+            Person person = new Person();
+            person.setId(resultSet.getInt("id"));
+            person.setName(resultSet.getString("name"));
+            person.setLocation(resultSet.getString("location"));
+            person.setBirthDate(resultSet.getTimestamp("birth_date"));
+
+            return person;
+        }
+    }
+
     //Select * from person
     public List<Person> findAll() {
-        return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper(Person.class));
+        //This when we are using default RowMapper
+        //return jdbcTemplate.query("select * from person", new BeanPropertyRowMapper(Person.class));
+
+        //Here when we need to use our custom RowMapper
+        return jdbcTemplate.query("select * from person", new PersonRowMapper());
     }
 
     public Person findById(int id) {
