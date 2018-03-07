@@ -36,7 +36,8 @@ public class JpaDemoApplication implements CommandLineRunner {
 		logger.info("Users id 1003 -> {}", jpaRepository.findById(1003));
 		//logger.info("Deleting id 1001 -> Number of rows deleted - {}", jpaRepository.deleteById(1001));
 
-		//logger.info("Inserting id 1004 -> {}", jpaRepository.save(new Person(1004, "Marco Cardenas", "Sucre-Bolivia", new Date())));
-		//logger.info("Updating id 1002 -> {}", jpaRepository.udpate(new Person(1002, "Fernando Arratia", "Cocha-Bolivia", new Date())));
+		//We do not need to send an ID
+		logger.info("Inserting id 1004 -> {}", jpaRepository.update(new Person(1004, "Marco Cardenas", "Sucre-Bolivia", new Date())));
+		logger.info("Updating id 1002 -> {}", jpaRepository.update(new Person(1002, "Fernando Arratia", "Cocha-Bolivia", new Date())));
 	}
 }
