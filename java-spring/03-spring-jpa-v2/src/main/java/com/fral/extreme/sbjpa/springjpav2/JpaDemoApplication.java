@@ -32,7 +32,7 @@ public class JpaDemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//logger.info("All users -> {}", jpaRepository.findAll());
+		logger.info("All users -> {}", jpaRepository.findAll());
 		logger.info("Users id 1003 -> {}", jpaRepository.findById(1003));
 		logger.info("Deleting id 1001 -> Number of rows deleted - {}", true);
 		jpaRepository.delete(1001);

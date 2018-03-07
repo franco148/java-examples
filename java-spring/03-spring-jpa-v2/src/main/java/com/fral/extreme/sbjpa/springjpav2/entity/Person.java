@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Entity
 //@Table(name = "Person") //This is not required if the table has already the same name.
+@NamedQuery(name = "find_all_persons", query = "select p from Person p")
 public class Person {
 
     @Id

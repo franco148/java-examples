@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 //Repository
 @Repository
@@ -40,5 +42,11 @@ public class PersonJpaRepository {
     public void delete(int id) {
         Person person = findById(id);
         entityManager.remove(person);
+    }
+
+
+    public List<Person> findAll() {
+        TypedQuery<Person> namedQuery = entityManager.createNamedQuery("find_all_persons", Person.class);
+        return namedQuery.getResultList();
     }
 }
