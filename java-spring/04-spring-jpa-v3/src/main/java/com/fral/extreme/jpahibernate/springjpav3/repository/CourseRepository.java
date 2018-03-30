@@ -3,10 +3,12 @@ package com.fral.extreme.jpahibernate.springjpav3.repository;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @Repository
+@Transactional
 public class CourseRepository {
 
     @Autowired
@@ -24,5 +26,7 @@ public class CourseRepository {
 
     public void deleteById(Long id) {
 
+        Course course = findById(id);
+        entityManager.remove(course);
     }
 }
