@@ -27,6 +27,6 @@ public class SpringJpaV3Application implements CommandLineRunner {
 	    Course courseResponse = courseRepository.findById(10001L);
 	    logger.info("Course 10001 -> {}", courseResponse);
 
-	    courseRepository.deleteById(10001L);
+//	    courseRepository.deleteById(10001L);
 	}
 }

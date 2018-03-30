@@ -24,7 +24,7 @@ public class CourseRepositoryTest {
     private CourseRepository courseRepository;
 
     @Test
-    public void findById() {
+    public void findById_basic() {
 
         Course course = courseRepository.findById(10001L);
 
@@ -38,6 +38,9 @@ public class CourseRepositoryTest {
     }
 
     @Test
-    public void deleteById() {
+    public void deleteById_basic() {
+        courseRepository.deleteById(10002L);
+
+        assertNull(courseRepository.findById(10002L));
     }
 }
