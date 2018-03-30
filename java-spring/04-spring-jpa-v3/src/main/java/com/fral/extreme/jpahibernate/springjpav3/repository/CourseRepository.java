@@ -21,7 +21,14 @@ public class CourseRepository {
 
     // Insert or update
     public Course save(Course course) {
-        return null;
+
+        if (course.getId() == null) {
+            entityManager.persist(course);
+        } else {
+            entityManager.merge(course);
+        }
+
+        return course;
     }
 
     public void deleteById(Long id) {

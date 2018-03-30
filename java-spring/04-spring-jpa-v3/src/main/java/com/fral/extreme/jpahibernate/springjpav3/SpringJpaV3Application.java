@@ -28,5 +28,7 @@ public class SpringJpaV3Application implements CommandLineRunner {
 	    logger.info("Course 10001 -> {}", courseResponse);
 
 //	    courseRepository.deleteById(10001L);
+
+        courseRepository.save(new Course("Advanced Micro services creating an application"));
 	}
 }
