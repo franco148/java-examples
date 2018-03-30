@@ -15,7 +15,7 @@ public class Course {
     //endregion
 
     //region Constructors
-    public Course() {
+    protected Course() {
     }
 
     public Course(String name) {
@@ -34,6 +34,16 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+    //endregion
+
+
+    //region Overrides
+    @Override
+    public String toString() {
+        return "Course{" +
+                "name='" + name + '\'' +
+                '}';
     }
     //endregion
 }
