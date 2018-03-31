@@ -52,6 +52,8 @@ public class CourseRepository {
         entityManager.flush();
 
         //To not track the changes any more or use entityManager.clear(); for all.
+        //Another way to avoid save post operations we can use.
+        //entityManager.refresh(course2); //It is going to take the information that is already saved in the database.
         entityManager.detach(course2);
         // Transaction keeps tracking the following changes
         course2.setName("Learn ReacJs framework - Updated");
