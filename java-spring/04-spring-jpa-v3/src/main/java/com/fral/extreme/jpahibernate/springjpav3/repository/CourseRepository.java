@@ -36,4 +36,25 @@ public class CourseRepository {
         Course course = findById(id);
         entityManager.remove(course);
     }
+
+    public void playWithEntityManager() {
+        Course course1 = new Course("Micro services eBook");
+        entityManager.persist(course1);
+        entityManager.flush();
+
+        // Transaction keeps tracking the following changes
+        course1.setName("Micro services eBook - Updated");
+        entityManager.flush();
+
+        // -----------------------------------------------
+        Course course2 = new Course("Learn ReacJs framework");
+        entityManager.persist(course2);
+        entityManager.flush();
+
+        //To not track the changes any more or use entityManager.clear(); for all.
+        entityManager.detach(course2);
+        // Transaction keeps tracking the following changes
+        course2.setName("Learn ReacJs framework - Updated");
+        entityManager.flush();
+    }
 }

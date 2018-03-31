@@ -24,11 +24,13 @@ public class SpringJpaV3Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-	    Course courseResponse = courseRepository.findById(10001L);
-	    logger.info("Course 10001 -> {}", courseResponse);
+//	    Course courseResponse = courseRepository.findById(10001L);
+//	    logger.info("Course 10001 -> {}", courseResponse);
 
 //	    courseRepository.deleteById(10001L);
 
-        courseRepository.save(new Course("Advanced Micro services creating an application"));
+//        courseRepository.save(new Course("Advanced Micro services creating an application"));
+
+        courseRepository.playWithEntityManager();
 	}
 }
