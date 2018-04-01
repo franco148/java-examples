@@ -1,17 +1,33 @@
 package com.fral.extreme.jpahibernate.springjpav3.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
+//@Table(name = "CourseDetailsTable")
+
+//@NamedQuery is not an repeatable query, so if we need to have more than one, we need to use, @NamedQueries
+//@NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"), and others ....})
+@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
 public class Course {
 
     //region Properties
     @Id
     @GeneratedValue
     private Long id;
+
+//    @Column(name = "fullname", nullable = false)
     private String name;
+
+    //This updates automatically every time an entity is updated.
+    @UpdateTimestamp
+    private LocalDateTime lastUpdatedDate;
+
+    @CreationTimestamp
+    private LocalDateTime createdDate;
     //endregion
 
     //region Constructors

@@ -7,23 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//Or specify the context that we want to test.
-//@SpringBootTest(classes = SpringJpaV3Application.class)
-public class JPQLTest {
+public class NativeQueriesTest {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -31,27 +25,38 @@ public class JPQLTest {
     private EntityManager entityManager;
 
     @Test
-    public void jpqlQueries_basic() {
+    public void nativeQueries_basic() {
 
-        Query query = entityManager.createQuery("SELECT c FROM Course c");
+        Query query = entityManager.createNativeQuery("SELECT * FROM Course c");
         List resultList = query.getResultList();
         logger.info("SELECT c FROM Course c -> {}", resultList);
     }
 
     @Test
-    public void jpqlQueries_typed() {
+    public void nativeQueries_with_parameter() {
 
-        TypedQuery<Course> query = entityManager.createQuery("SELECT c FROM Course c", Course.class);
-        List<Course> resultList = query.getResultList();
-        logger.info("SELECT c FROM Course c -> {}", resultList);
-    }
-
-    @Test
-    public void jpqlQueries_named() {
-
-        Query query = entityManager.createNamedQuery("query_get_all_courses");
+        Query query = entityManager.createNativeQuery("SELECT * FROM Course WHERE id = ?", Course.class);
+        query.setParameter(1, 10001L);
         List resultList = query.getResultList();
         logger.info("SELECT c FROM Course c -> {}", resultList);
     }
 
+    @Test
+    public void nativeQueries_with_named_parameter() {
+
+        Query query = entityManager.createNativeQuery("SELECT * FROM Course WHERE id = :id", Course.class);
+        query.setParameter("id", 10001L);
+        List resultList = query.getResultList();
+        logger.info("SELECT c FROM Course c -> {}", resultList);
+    }
+
+    @Test
+    @Transactional
+    public void nativeQueries_to_update() {
+
+        Query query = entityManager.createNativeQuery("UPDATE COURSE SET last_updated_date = sysdate()", Course.class);
+
+        int noOfRowsUpdated = query.executeUpdate();
+        logger.info("SELECT c FROM Course c -> {}", noOfRowsUpdated);
+    }
 }
