@@ -2,6 +2,7 @@ package com.fral.extreme.jpahibernate.springjpav3;
 
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
 import com.fral.extreme.jpahibernate.springjpav3.repository.CourseRepository;
+import com.fral.extreme.jpahibernate.springjpav3.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class SpringJpaV3Application implements CommandLineRunner {
 	@Autowired
 	private CourseRepository courseRepository;
 
+	@Autowired
+	private StudentRepository studentRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringJpaV3Application.class, args);
 	}
@@ -31,6 +35,8 @@ public class SpringJpaV3Application implements CommandLineRunner {
 
 //        courseRepository.save(new Course("Advanced Micro services creating an application"));
 
-        courseRepository.playWithEntityManager();
+        //courseRepository.playWithEntityManager();
+
+		studentRepository.saveStudentWithPassport();
 	}
 }
