@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
@@ -31,11 +32,14 @@ public class StudentRepositoryTest {
     private EntityManager entityManager;
 
     @Test
+    @Transactional
     public void retrieveStudentsAndPassportDetails() {
 
         Student student = entityManager.find(Student.class, 20001L);
         logger.info("Student -> {}", student);
 
+        //The following sentence is going to fail because now the FETCH TYPE is LAZY
+        //So to fix that, we need the @transactional annotation.
         logger.info("passport -> {}", student.getPassport());
     }
 }

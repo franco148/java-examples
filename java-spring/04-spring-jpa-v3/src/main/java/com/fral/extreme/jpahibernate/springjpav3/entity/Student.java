@@ -12,7 +12,8 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    // The default FetchType is EAGER. The entity loads its dependencies.
+    @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
 
