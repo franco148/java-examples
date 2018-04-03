@@ -1,6 +1,7 @@
 package com.fral.extreme.jpahibernate.springjpav3.repository;
 
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
+import com.fral.extreme.jpahibernate.springjpav3.entity.Passport;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class StudentRepositoryTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private StudentRepository courseRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
     private EntityManager entityManager;
@@ -41,5 +42,17 @@ public class StudentRepositoryTest {
         //The following sentence is going to fail because now the FETCH TYPE is LAZY
         //So to fix that, we need the @transactional annotation.
         logger.info("passport -> {}", student.getPassport());
+    }
+
+
+    /**
+     * - Session & Session Factory
+     * - EntityManager & Persistence Context
+     * - Transaction.
+     */
+    @Test
+    //@Transactional //Creates a persistence context: Is a place where all the entities where we are operating are being stored.
+    public void someTest() {
+        studentRepository.someOperationToUnderstandPersistenceContext();
     }
 }

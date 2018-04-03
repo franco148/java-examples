@@ -71,4 +71,23 @@ public class StudentRepository {
         student2.setName("Learn ReacJs framework - Updated");
         entityManager.flush();
     }
+
+    public void someOperationToUnderstandPersistenceContext() {
+
+        //Database Operation 1 - Retrieve student
+        Student student = entityManager.find(Student.class, 20001L);
+        //PersistenceContext(student)
+
+        //Database Operation 2 - Retrieve passport
+        Passport passport = student.getPassport();
+        //PersistenceContext(student, passport)
+
+        //Database Operation 3 - Update passport
+        passport.setNumber("ZA654321");
+        //PersistenceContext(student, passport++)
+
+        //Database Operation 4 - Update student
+        student.setName("Franco Name - Updated");
+        //PersistenceContext(student++, passport++)
+    }
 }
