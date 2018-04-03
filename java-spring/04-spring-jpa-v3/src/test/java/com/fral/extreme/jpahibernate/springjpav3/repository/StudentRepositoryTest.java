@@ -55,4 +55,14 @@ public class StudentRepositoryTest {
     public void someTest() {
         studentRepository.someOperationToUnderstandPersistenceContext();
     }
+
+    @Test
+    @Transactional
+    public void retrievePassportAndAssociatedStudentDetails() {
+
+        Passport passport = entityManager.find(Passport.class, 30001L);
+        logger.info("Passport -> {}", passport);
+
+        logger.info("Associated Student -> {}", passport.getStudent());
+    }
 }

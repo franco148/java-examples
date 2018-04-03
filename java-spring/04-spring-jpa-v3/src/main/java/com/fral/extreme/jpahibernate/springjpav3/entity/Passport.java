@@ -1,9 +1,6 @@
 package com.fral.extreme.jpahibernate.springjpav3.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Passport {
@@ -14,6 +11,11 @@ public class Passport {
 
     @Column(nullable = false)
     private String number;
+
+    //We need reference to Student for having bi-directional relationship, but Student
+    //is going to be the owner of the relation, so we need to add mappedBy property.
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+    private Student student;
 
 
     public Passport() {
@@ -33,6 +35,14 @@ public class Passport {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     @Override

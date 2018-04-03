@@ -13,6 +13,7 @@ public class Student {
     private String name;
 
     // The default FetchType is EAGER. The entity loads its dependencies.
+    // Choosing as the owner of the relationship
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
