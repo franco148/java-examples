@@ -21,6 +21,12 @@ public class Student {
 
     //For this example, student is the owner of many to many relationships.
     @ManyToMany
+    //IN the owner of the relationship we can customize the join table
+    @JoinTable(
+            name = "StudentsInCourses",
+            joinColumns = @JoinColumn(name = "studentId"),
+            inverseJoinColumns = @JoinColumn(name = "courseId")
+    )
     private List<Course> courses = new ArrayList<>();
 
 
