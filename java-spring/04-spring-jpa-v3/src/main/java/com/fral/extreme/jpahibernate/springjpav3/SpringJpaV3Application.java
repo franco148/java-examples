@@ -37,6 +37,8 @@ public class SpringJpaV3Application implements CommandLineRunner {
 
         //courseRepository.playWithEntityManager();
 
-		studentRepository.saveStudentWithPassport();
+		//studentRepository.saveStudentWithPassport();
+
+		courseRepository.addReviewForCourse();
 	}
 }
