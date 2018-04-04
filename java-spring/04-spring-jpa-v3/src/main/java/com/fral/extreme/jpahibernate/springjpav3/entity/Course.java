@@ -31,6 +31,7 @@ public class Course {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
+    //FetchType by default in OneToMany relationships are LAZY.
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
     //endregion

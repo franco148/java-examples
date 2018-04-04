@@ -11,6 +11,7 @@ public class Review {
 
     private String rating;
     private String description;
+    //FetchType by default is EAGER
     @ManyToOne
     private Course course;
 
