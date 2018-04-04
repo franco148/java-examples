@@ -33,11 +33,11 @@ VALUES (20003, 'Carlos Medinacelli', 30003);
 
 
 -- --------------------------- REVIEW -----------------------------------
-INSERT INTO review (id, rating, description)
-VALUES (40001, '5', 'Great Course');
+INSERT INTO review (id, rating, description, course_id)
+VALUES (40001, '5', 'Great Course', 10001);
 
-INSERT INTO review (id, rating, description)
-VALUES (40002, '4', 'Awesome course');
+INSERT INTO review (id, rating, description, course_id)
+VALUES (40002, '4', 'Awesome course', 10001);
 
-INSERT INTO review (id, rating, description)
-VALUES (40003, '5', 'Wonderful course');
+INSERT INTO review (id, rating, description, course_id)
+VALUES (40003, '5', 'Wonderful course', 10003);
