@@ -34,6 +34,10 @@ public class Course {
     //FetchType by default in OneToMany relationships are LAZY.
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
+
+    //In many to many relationships does not matter which one is the owner.
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
     //endregion
 
     //region Constructors
@@ -68,6 +72,14 @@ public class Course {
 
     public void removeReview(Review review) {
         this.reviews.remove(review);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     //endregion

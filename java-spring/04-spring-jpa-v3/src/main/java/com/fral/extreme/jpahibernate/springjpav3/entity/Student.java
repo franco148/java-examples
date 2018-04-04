@@ -1,6 +1,8 @@
 package com.fral.extreme.jpahibernate.springjpav3.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -16,6 +18,10 @@ public class Student {
     // Choosing as the owner of the relationship
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    //For this example, student is the owner of many to many relationships.
+    @ManyToMany
+    private List<Course> courses = new ArrayList<>();
 
 
     public Student() {
@@ -43,6 +49,14 @@ public class Student {
 
     public void setPassport(Passport passport) {
         this.passport = passport;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
 
     @Override
