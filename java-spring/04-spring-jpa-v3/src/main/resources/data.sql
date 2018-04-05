@@ -41,3 +41,16 @@ VALUES (40002, '4', 'Awesome course', 10001);
 
 INSERT INTO review (id, rating, description, course_id)
 VALUES (40003, '5', 'Wonderful course', 10003);
+
+-- --------------------------- STUDENTS IN COURSES -----------------------------------
+INSERT INTO students_in_courses (student_id, course_id)
+VALUES (20001, 10001);
+
+INSERT INTO students_in_courses (student_id, course_id)
+VALUES (20002, 10001);
+
+INSERT INTO students_in_courses (student_id, course_id)
+VALUES (20003, 10001);
+
+INSERT INTO students_in_courses (student_id, course_id)
+VALUES (20001, 10003);
