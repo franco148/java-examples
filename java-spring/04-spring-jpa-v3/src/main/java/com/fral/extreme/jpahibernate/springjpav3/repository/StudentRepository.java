@@ -90,4 +90,18 @@ public class StudentRepository {
         student.setName("Franco Name - Updated");
         //PersistenceContext(student++, passport++)
     }
+
+    public void insertStudentAndCourse() {
+        Student student = new Student("Jack Sparrow");
+        Course course = new Course("Como ser un buen pirata");
+
+        entityManager.persist(student);
+        entityManager.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        //Then save the owning side.
+        entityManager.persist(student);
+    }
 }
