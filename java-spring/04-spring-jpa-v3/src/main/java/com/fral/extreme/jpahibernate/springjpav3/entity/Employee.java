@@ -8,7 +8,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//Another option is, not use inheritance instead a @MappedSuperClass
+@MappedSuperclass
+
+//@Entity
+
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//The following for overriding the DType column which is the default.
+//@DiscriminatorColumn(name = "")
+
+//For retrieving data, it uses UNION.
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+//@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
 
     //region Properties
