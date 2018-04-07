@@ -86,4 +86,50 @@ public class JPQLTest {
 
         logger.info("Result of JPQL Students -> {}", resultList);
     }
+
+
+    //JOIN => SELECT c, s FROM Course c JOIN c.students s
+    //LEFT JOIN => SELECT c, s FROM Course c LEFT JOIN c.students s
+    //CROSS JOIN => SELECT c, s FROM Course c, students s
+    @Test
+    public void join_test() {
+        Query query = entityManager.createQuery("SELECT c, s FROM Course c JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Students -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            //result[0];//Course
+            //result[1];//Student
+            logger.info("Course{} and Student{}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void left_join_test() {
+        Query query = entityManager.createQuery("SELECT c, s FROM Course c LEFT JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Students -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            //result[0];//Course
+            //result[1];//Student
+            logger.info("Course{} and Student {}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void cross_join_test() {
+        Query query = entityManager.createQuery("SELECT c, s FROM Course c, Student s");
+        List<Object[]> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Students -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            //result[0];//Course
+            //result[1];//Student
+            logger.info("Course{} and Student {}", result[0], result[1]);
+        }
+    }
 }
