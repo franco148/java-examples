@@ -62,4 +62,19 @@ public class JPQLTest {
         logger.info("Result of JPQL Courses without Students -> {}", resultList);
     }
 
+    @Test
+    public void jpql_courses_with_atleast_2_students() {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT c FROM Course c WHERE SIZE(c.students) >= 2", Course.class);
+        List<Course> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Courses without Students -> {}", resultList);
+    }
+
+    @Test
+    public void jpql_courses_ordered_by_numberOf_students() {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT c FROM Course c ORDER BY SIZE(c.students)", Course.class);
+        List<Course> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Courses without Students -> {}", resultList);
+    }
 }
