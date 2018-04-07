@@ -1,6 +1,7 @@
 package com.fral.extreme.jpahibernate.springjpav3.repository;
 
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
+import com.fral.extreme.jpahibernate.springjpav3.entity.Student;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -76,5 +77,13 @@ public class JPQLTest {
         List<Course> resultList = query.getResultList();
 
         logger.info("Result of JPQL Courses without Students -> {}", resultList);
+    }
+
+    @Test
+    public void jpql_students_with_passports_in_a_certain_pattern() {
+        TypedQuery<Student> query = entityManager.createQuery("SELECT s FROM Student s WHERE s.passport.number LIKE '%343%'", Student.class);
+        List<Student> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Students -> {}", resultList);
     }
 }
