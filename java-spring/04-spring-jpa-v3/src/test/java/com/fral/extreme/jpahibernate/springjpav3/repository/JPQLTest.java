@@ -54,4 +54,12 @@ public class JPQLTest {
         logger.info("SELECT c FROM Course c -> {}", resultList);
     }
 
+    @Test
+    public void jpql_courses_without_students() {
+        TypedQuery<Course> query = entityManager.createQuery("SELECT c FROM Course c WHERE c.students is empty", Course.class);
+        List<Course> resultList = query.getResultList();
+
+        logger.info("Result of JPQL Courses without Students -> {}", resultList);
+    }
+
 }
