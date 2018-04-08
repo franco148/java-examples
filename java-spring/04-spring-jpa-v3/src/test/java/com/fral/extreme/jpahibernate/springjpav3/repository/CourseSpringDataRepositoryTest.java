@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -59,6 +62,27 @@ public class CourseSpringDataRepositoryTest {
         Sort sort = new Sort(Sort.Direction.DESC, "name");
 
         logger.info("Find all courses sorted by name DESC -> {}", courseRepository.findAll(sort));
+    }
+
+    @Test
+    public void get_courses_pagination() {
+
+        PageRequest pageRequest = PageRequest.of(0, 3);
+
+        Page<Course> firstPage = courseRepository.findAll(pageRequest);
+        logger.info("First Course page -> {}", firstPage.getContent());
+
+        Pageable secondPageable = firstPage.nextPageable();
+        Page<Course> secondPage = courseRepository.findAll(secondPageable);
+        logger.info("Second Course page -> {}", secondPage.getContent());
+
+        Pageable thirdPageable = firstPage.nextPageable();
+        Page<Course> thirdPage = courseRepository.findAll(thirdPageable);
+        logger.info("Third Course page -> {}", thirdPage.getContent());
+
+        Pageable fourthPageable = firstPage.nextPageable();
+        Page<Course> fourthPage = courseRepository.findAll(fourthPageable);
+        logger.info("Fourth Course page -> {}", fourthPage.getContent());
     }
 
 }

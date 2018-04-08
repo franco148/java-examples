@@ -10,6 +10,24 @@ VALUES (10003, 'Spring Framework in 50 steps', sysdate(), sysdate());
 INSERT INTO course(id, name, created_date, last_updated_date)
 VALUES (10004, 'Angular in 50 steps', sysdate(), sysdate());
 
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10005, 'Angular JS in action', sysdate(), sysdate());
+
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10006, 'Docker for developers', sysdate(), sysdate());
+
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10007, 'Machine learning for beginners', sysdate(), sysdate());
+
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10008, 'Mean stack development', sysdate(), sysdate());
+
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10009, 'Psicologia del color', sysdate(), sysdate());
+
+INSERT INTO course(id, name, created_date, last_updated_date)
+VALUES (10010, 'ReactJS for dummies', sysdate(), sysdate());
+
 
 -- --------------------------- PASSPORT -----------------------------------
 INSERT INTO passport (id, number)
