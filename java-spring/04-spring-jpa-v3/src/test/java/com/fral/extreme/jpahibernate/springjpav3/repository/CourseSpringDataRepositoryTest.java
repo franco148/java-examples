@@ -76,13 +76,18 @@ public class CourseSpringDataRepositoryTest {
         Page<Course> secondPage = courseRepository.findAll(secondPageable);
         logger.info("Second Course page -> {}", secondPage.getContent());
 
-        Pageable thirdPageable = firstPage.nextPageable();
+        Pageable thirdPageable = secondPage.nextPageable();
         Page<Course> thirdPage = courseRepository.findAll(thirdPageable);
         logger.info("Third Course page -> {}", thirdPage.getContent());
 
-        Pageable fourthPageable = firstPage.nextPageable();
+        Pageable fourthPageable = thirdPage.nextPageable();
         Page<Course> fourthPage = courseRepository.findAll(fourthPageable);
         logger.info("Fourth Course page -> {}", fourthPage.getContent());
+    }
+
+    @Test
+    public void find_using_name() {
+        logger.info("FindByName -> {}", courseRepository.findByName("Mean stack development"));
     }
 
 }
