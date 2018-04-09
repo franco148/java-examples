@@ -1,5 +1,6 @@
 package com.fral.extreme.jpahibernate.springjpav3.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -37,6 +38,7 @@ public class Course {
 
     //In many to many relationships does not matter which one is the owner.
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
     //endregion
 
