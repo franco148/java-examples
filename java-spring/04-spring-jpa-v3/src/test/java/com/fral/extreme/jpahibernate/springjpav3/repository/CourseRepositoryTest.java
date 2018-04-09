@@ -78,4 +78,21 @@ public class CourseRepositoryTest {
         logger.info("{}", review.getCourse());
 
     }
+
+
+    @Test
+    //If @Transactional does not exits, findById method is going to be executed twice (on executing the query in the database).
+    @Transactional
+    public void findById_firstLevelCacheDemo() {
+
+        Course course = courseRepository.findById(10001L);
+        logger.info("First course retrieved {}", course);
+
+        Course course2 = courseRepository.findById(10001L);
+        logger.info("First course retrieved again {}", course2);
+
+        //assertEquals("JPA in 50 steps", course.getName());
+
+        //logger.info("Testing is running...");
+    }
 }
