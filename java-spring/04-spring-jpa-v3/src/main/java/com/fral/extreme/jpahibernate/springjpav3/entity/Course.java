@@ -15,6 +15,7 @@ import java.util.List;
 //@NamedQuery is not an repeatable query, so if we need to have more than one, we need to use, @NamedQueries
 //@NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"), and others ....})
 @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
+@Cacheable
 public class Course {
 
     //region Properties
