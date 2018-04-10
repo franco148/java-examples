@@ -2,7 +2,9 @@ package com.fral.extreme.jpahibernate.springjpav3.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,6 +18,9 @@ import java.util.List;
 //@NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"), and others ....})
 @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
 @Cacheable
+//The following is a specific HIBERNATE annotation.
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
+@Where(clause = "is_deleted = false")
 public class Course {
 
     //region Properties
@@ -32,6 +37,8 @@ public class Course {
 
     @CreationTimestamp
     private LocalDateTime createdDate;
+
+    private boolean isDeleted;
 
     //FetchType by default in OneToMany relationships are LAZY.
     @OneToMany(mappedBy = "course")

@@ -1,32 +1,32 @@
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10001, 'JPA in 100 steps', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10001, 'JPA in 100 steps', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10002, 'Spring in 50 steps', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10002, 'Spring in 50 steps', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10003, 'Spring Framework in 50 steps', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10003, 'Spring Framework in 50 steps', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10004, 'Angular in 50 steps', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10004, 'Angular in 50 steps', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10005, 'Angular JS in action', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10005, 'Angular JS in action', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10006, 'Docker for developers', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10006, 'Docker for developers', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10007, 'Machine learning for beginners', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10007, 'Machine learning for beginners', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10008, 'Mean stack development', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10008, 'Mean stack development', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10009, 'Psicologia del color', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10009, 'Psicologia del color', sysdate(), sysdate(), FALSE);
 
-INSERT INTO course(id, name, created_date, last_updated_date)
-VALUES (10010, 'ReactJS for dummies', sysdate(), sysdate());
+INSERT INTO course(id, name, created_date, last_updated_date, is_deleted)
+VALUES (10010, 'ReactJS for dummies', sysdate(), sysdate(), FALSE);
 
 
 -- --------------------------- PASSPORT -----------------------------------
