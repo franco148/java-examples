@@ -2,6 +2,7 @@ package com.fral.extreme.jpahibernate.springjpav3.repository;
 
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Review;
+import com.fral.extreme.jpahibernate.springjpav3.entity.ReviewRating;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +73,8 @@ public class CourseRepository {
         logger.info("course.getReviews() -> {}", course10003.getReviews());
 
         //add 2 reviews to it
-        Review review1 = new Review("5", "Great Hands-on Stuff.");
-        Review review2 = new Review("5", "Really helpful.");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Hands-on Stuff.");
+        Review review2 = new Review(ReviewRating.FIVE, "Really helpful.");
 
         //setting relationships
         course10003.addReview(review1);

@@ -27,6 +27,8 @@ public class NativeQueriesTest {
     @Test
     public void nativeQueries_basic() {
 
+        //Once I have updated my Course Entity for Soft Delete operations, a solution for Native queries would
+        //be update the query adding where clause since it does not support annotation.
         Query query = entityManager.createNativeQuery("SELECT * FROM Course c");
         List resultList = query.getResultList();
         logger.info("SELECT c FROM Course c -> {}", resultList);

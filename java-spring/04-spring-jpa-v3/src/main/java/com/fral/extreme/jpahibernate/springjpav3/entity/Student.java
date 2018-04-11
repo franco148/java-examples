@@ -14,6 +14,9 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
+    @Embedded
+    private Address address;
+
     // The default FetchType is EAGER. The entity loads its dependencies.
     // Choosing as the owner of the relationship
     @OneToOne(fetch = FetchType.LAZY)
@@ -63,6 +66,14 @@ public class Student {
 
     public void addCourse(Course course) {
         this.courses.add(course);
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
