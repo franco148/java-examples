@@ -17,8 +17,12 @@ import java.util.List;
 //@Table(name = "CourseDetailsTable")
 
 //@NamedQuery is not an repeatable query, so if we need to have more than one, we need to use, @NamedQueries
-//@NamedQueries(value = { @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"), and others ....})
-@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
+@NamedQueries(value =
+        {
+                @NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c"),
+                @NamedQuery(name = "query_get_all_courses_join_fetch", query = "SELECT c FROM Course c JOIN FETCH c.students s")
+        })
+//@NamedQuery(name = "query_get_all_courses", query = "SELECT c FROM Course c")
 @Cacheable
 //The following is a specific HIBERNATE annotation.
 @SQLDelete(sql = "update course set is_deleted=true where id=?")
