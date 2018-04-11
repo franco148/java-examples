@@ -1,5 +1,6 @@
 package com.fral.extreme.jpahibernate.springjpav3.repository;
 
+import com.fral.extreme.jpahibernate.springjpav3.entity.Address;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Course;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Passport;
 import com.fral.extreme.jpahibernate.springjpav3.entity.Student;
@@ -70,6 +71,16 @@ public class StudentRepositoryTest {
     @Transactional
     public void retrieveStudentAndCourses() {
         Student student20001 = entityManager.find(Student.class, 20001L);
+        logger.info("Student -> {}", student20001);
+        logger.info("Student Courses -> {}", student20001.getCourses());
+    }
+
+    @Test
+    @Transactional
+    public void setAddressDetails() {
+        Student student20001 = entityManager.find(Student.class, 20001L);
+        student20001.setAddress(new Address("line1", "line2", "Cochabamba"));
+        entityManager.flush();
         logger.info("Student -> {}", student20001);
         logger.info("Student Courses -> {}", student20001.getCourses());
     }
