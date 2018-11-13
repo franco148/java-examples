@@ -1,13 +1,14 @@
 package com.eextreme.poc.domain;
 
-import com.sun.istack.internal.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
 
 @Document
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class Movie {
 
     private String id;
