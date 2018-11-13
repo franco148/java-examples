@@ -1,4 +1,4 @@
-package com.eextreme.poc.service;
+package com.eextreme.poc.services;
 
 import com.eextreme.poc.domain.Movie;
 import com.eextreme.poc.domain.MovieEvent;
