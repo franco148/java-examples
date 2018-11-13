@@ -3,6 +3,7 @@ package com.eextreme.poc.controllers;
 import com.eextreme.poc.domain.Movie;
 import com.eextreme.poc.domain.MovieEvent;
 import com.eextreme.poc.services.MovieService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class MovieController {
     }
 
 
-    @GetMapping("/{id}/events")
+    @GetMapping(value = "/{id}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<MovieEvent> streamMovieEvents(@PathVariable("id") String id) {
         return this.movieService.events(id);
     }
