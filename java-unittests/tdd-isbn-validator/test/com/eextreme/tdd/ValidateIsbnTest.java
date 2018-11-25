@@ -47,5 +47,11 @@ public class ValidateIsbnTest {
 		ValidateIsbn validator = new ValidateIsbn();
 		validator.checkIsbn("123456789");
 	}
+	
+	@Test(expected = NumberFormatException.class)
+	public void nonNumericIsbnAreNotAllowed() {
+		ValidateIsbn validator = new ValidateIsbn();
+		validator.checkIsbn("helloworld");
+	}
 
 }
