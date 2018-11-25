@@ -38,5 +38,14 @@ public class ValidateIsbnTest {
 		boolean result = validator.checkIsbn("0140449117"); //0140449117
 		assertFalse(result);
 	}
+	
+	/*
+	 * Since this scenario should fail, it may be good to throw a NumberFormatException.
+	 */
+	@Test(expected = NumberFormatException.class)
+	public void nineDigitIsbnAreNotAllowed() {
+		ValidateIsbn validator = new ValidateIsbn();
+		validator.checkIsbn("123456789");
+	}
 
 }

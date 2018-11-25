@@ -10,7 +10,6 @@ package com.eextreme.tdd;
 public class ValidateIsbn {
 
 	public boolean checkIsbn(String isbnNumber) {
-		
 		/*
 		 * REMEMBER: The quality of this code is not important yet. It is the tests that are important, and as we build
 		 * them up this code will improve as we add more tests and refactor.
@@ -22,7 +21,6 @@ public class ValidateIsbn {
 		}
 		
 		return total % 11 == 0;
-		
 	}
 
 }
