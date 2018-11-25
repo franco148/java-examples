@@ -25,9 +25,16 @@ public class ValidateIsbn {
 		
 		for (int i = 0; i < 10; i++) {
 			if (!Character.isDigit(isbnNumber.charAt(i))) {
-				throw new NumberFormatException("ISBN numbers can only contain numeric digits");
-			}
-			total += isbnNumber.charAt(i) * (10 - i);			
+				if (i == 9 && isbnNumber.charAt(i) == 'X') {
+					// This scenario is ok
+					// According the rules, when the last number is X, it will be replaced by 10
+					total += 10;
+				} else {
+					throw new NumberFormatException("ISBN numbers can only contain numeric digits");					
+				}
+			} else {
+				total += Character.getNumericValue(isbnNumber.charAt(i)) * (10 - i);
+			}			
 		}
 		
 		return total % 11 == 0;
