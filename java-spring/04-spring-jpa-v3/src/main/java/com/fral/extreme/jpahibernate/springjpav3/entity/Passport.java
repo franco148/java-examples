@@ -1,4 +1,4 @@
-package com.fral.extreme.jpahibernate.springjpav3.entity;
+ package com.fral.extreme.jpahibernate.springjpav3.entity;
 
 import javax.persistence.*;
 
