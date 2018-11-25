@@ -10,11 +10,18 @@ package com.eextreme.tdd;
 public class ValidateIsbn {
 
 	public boolean checkIsbn(String isbnNumber) {
-		if (isbnNumber == "0140449116") {
-			return true;			
-		} else {
-			return false;
+		
+		/*
+		 * REMEMBER: The quality of this code is not important yet. It is the tests that are important, and as we build
+		 * them up this code will improve as we add more tests and refactor.
+		 */
+		int total = 0;
+		
+		for (int i = 0; i < 10; i++) {
+			total += isbnNumber.charAt(i) * (10 - i);			
 		}
+		
+		return total % 11 == 0;
 		
 	}
 
