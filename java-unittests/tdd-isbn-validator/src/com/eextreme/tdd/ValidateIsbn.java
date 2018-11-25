@@ -10,6 +10,13 @@ package com.eextreme.tdd;
 public class ValidateIsbn {
 
 	public boolean checkIsbn(String isbnNumber) {
+		
+		// This was implemented when I needed to verify the number of digits of a ISBN number.
+		if (isbnNumber.length() != 10) {
+			throw new NumberFormatException("ISBN numbers must be 10 digits long.");
+		}
+				
+
 		/*
 		 * REMEMBER: The quality of this code is not important yet. It is the tests that are important, and as we build
 		 * them up this code will improve as we add more tests and refactor.
