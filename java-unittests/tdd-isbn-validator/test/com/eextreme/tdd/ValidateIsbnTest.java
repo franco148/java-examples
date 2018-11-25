@@ -23,7 +23,7 @@ import org.junit.Test;
 public class ValidateIsbnTest {
 
 	@Test
-	public void checkAValidISBN() {
+	public void checkAValid10DigitsISBN() {
 		ValidateIsbn validator = new ValidateIsbn();
 		boolean result = validator.checkIsbn("0140449116"); //0140449116
 		assertTrue("First Value", result);
@@ -33,16 +33,33 @@ public class ValidateIsbnTest {
 	}
 	
 	@Test
-	public void IsbnNumbersEndingInAnXAreValid() {
+	public void checkAValid13DigitsIsbn() {
+		ValidateIsbn validator = new ValidateIsbn();
+		boolean result = validator.checkIsbn("9781853260087"); //9781853260087
+		assertTrue("First Value", result);
+		
+		result = validator.checkIsbn("9781853267338"); //9781853267338
+		assertTrue("Second Value", result);
+	}
+	
+	@Test
+	public void TenDigitIsbnNumbersEndingInAnXAreValid() {
 		ValidateIsbn validator = new ValidateIsbn();
 		boolean result = validator.checkIsbn("012000030X"); //012000030X
 		assertTrue(result);
 	}
 	
 	@Test
-	public void checkAnInValidISBN() {
+	public void checkAnInValid10DigitsISBN() {
 		ValidateIsbn validator = new ValidateIsbn();
 		boolean result = validator.checkIsbn("0140449117"); //0140449117
+		assertFalse(result);
+	}
+	
+	@Test
+	public void checkAnInValid13DigitsISBN() {
+		ValidateIsbn validator = new ValidateIsbn();
+		boolean result = validator.checkIsbn("9781853267336"); //9781853267338
 		assertFalse(result);
 	}
 	
