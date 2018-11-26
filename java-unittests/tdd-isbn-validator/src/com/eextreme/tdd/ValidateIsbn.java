@@ -18,19 +18,21 @@ public class ValidateIsbn {
 		
 		//Adding a new feature. 13 digits number ISBN should be valid
 		if (isbnNumber.length() == LONG_ISBN_LENGTH) {
-			return isThisAValid13DigitIsbn(isbnNumber);
-		} else {
+			return isThisAValidLongIsbn(isbnNumber);
+		} else if (isbnNumber.length() == SHORT_ISBN_LENGTH) {
 			// This was implemented when I needed to verify the number of digits of a ISBN number.
-			if (isbnNumber.length() != SHORT_ISBN_LENGTH) {
-				throw new NumberFormatException("ISBN numbers must be 10 digits long.");
-			}
+//			if (isbnNumber.length() != SHORT_ISBN_LENGTH) {
+//				throw new NumberFormatException("ISBN numbers must be 10 digits long.");
+//			}
 			
-			return isThisAValid10DigitsIsbn(isbnNumber);
+			return isThisAValidShortIsbn(isbnNumber);
 		}
+		
+		throw new NumberFormatException("ISBN numbers must be 10 digits long.");
 		
 	}
 
-	private boolean isThisAValid10DigitsIsbn(String isbnNumber) {
+	private boolean isThisAValidShortIsbn(String isbnNumber) {
 		/*
 		 * REMEMBER: The quality of this code is not important yet. It is the tests that are important, and as we build
 		 * them up this code will improve as we add more tests and refactor.
@@ -54,7 +56,7 @@ public class ValidateIsbn {
 		return total % SHORT_ISBN_MULTIPLIER == 0;
 	}
 
-	private boolean isThisAValid13DigitIsbn(String isbnNumber) {
+	private boolean isThisAValidLongIsbn(String isbnNumber) {
 		int total = 0;
 		
 		for (int i = 0; i < LONG_ISBN_LENGTH; i++) {
