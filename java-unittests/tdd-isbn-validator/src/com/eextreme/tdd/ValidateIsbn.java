@@ -22,10 +22,18 @@ package com.eextreme.tdd;
  *   In other words there will not be normally a one to one relationship between your tests and your methods, if you are naming a test with a name
  *   that almost exactly matches one of your method names then this could be a warning that you might be forgetting to test business logic
  *   not methods.  
- * - TESTS MUST BE REPEATABLE: 
+ * - TESTS MUST BE REPEATABLE: This is another important point of test driven development, each time we re run the test suite were not just checking
+ *   but we fix the latest test we are also checking that the previous tests have not broken. So given the same data our tests must produce the same
+ *   result every single time.
+ * - TESTS MUS BE THOROUGH: There is not point only testing some of the conditions that could occur for example with the ISBN validator (many scenarios).
  *    
  *    
- *    
+ *    WHAT TEST SHOULD I WRITE?
+ * 
+ * - WHAT SHOULD THE LOGIC BE? In our examples would be the scenarios we took into account.
+ * - WHAT IS THE OPPOSITE TO THAT LOGIC?  
+ * - ARE THERE ANY EDGE CASES?
+ * - ARE THERE ANY ERROR CONDITIONS?: This should not be part of testing development (TDD).
  *    
  *    
  *    
