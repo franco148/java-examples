@@ -37,6 +37,17 @@ package com.eextreme.tdd;
  *    
  *    
  *    
+ *    NEW BUSINESS LOGIC: STUBS
+ *    
+ * - Stock locator method returns:
+ *   A unique internal "locator code" for the book, made up of:
+ *   	Last 4 digits of ISBN number, first initial of surname, and number of words in the title.
+ *   EG:
+ *   	7396J4
+ *   	99116HI
+ *   
+ *   For implementing the new business logic, we are going to consume a 3rd party web service.
+ *    
  */
 public class ValidateIsbn {
 
