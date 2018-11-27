@@ -9,7 +9,7 @@ public class StockManagementTests {
 	@Test
 	public void testCanGetACorrectLocatorCode() {
 		
-		ExternalIsbnDataService testService = new ExternalIsbnDataService() {
+		ExternalIsbnDataService testWebService = new ExternalIsbnDataService() {
 			
 			@Override
 			public Book lookup(String isbn) {
@@ -17,8 +17,19 @@ public class StockManagementTests {
 			}
 		};
 		
-		String isbn = "0140177396";
-		StockManager stockManager = new StockManager(testService);
+		ExternalIsbnDataService testDbService = new ExternalIsbnDataService() {
+			
+			@Override
+			public Book lookup(String isbn) {
+				return null;
+			}
+		};
+		
+		StockManager stockManager = new StockManager();
+		stockManager.setWebService(testWebService);
+		stockManager.setDbService(testDbService);
+		
+		String isbn = "0140177396";		
 		String locatorCode = stockManager.getLocatorCode(isbn);
 		assertEquals("7396J4", locatorCode);
 	}
