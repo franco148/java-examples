@@ -55,8 +55,11 @@ public class StockManagementTests {
 		String locatorCode = stockManager.getLocatorCode(isbn);
 		// assertEquals("7396J4", locatorCode);
 		
-		verify(databaseService, times(1)).lookup(isbn);
-		verify(webService, times(0)).lookup(anyString());
+		// verify(databaseService, times(1)).lookup(isbn); // By default for times is 1
+		// verify(webService, times(0)).lookup(anyString());
+		
+		verify(databaseService).lookup(isbn); // By default for times is 1
+		verify(webService, never()).lookup(anyString());
 	}
 	
 	@Test
@@ -75,8 +78,18 @@ public class StockManagementTests {
 		String locatorCode = stockManager.getLocatorCode(isbn);
 		// assertEquals("7396J4", locatorCode);
 		
-		verify(databaseService, times(1)).lookup(isbn);
-		verify(webService, times(1)).lookup(anyString());
+		// verify(databaseService, times(1)).lookup(isbn);
+		// verify(webService, times(1)).lookup(anyString());
+		
+		// Another mockito method options
+		/*times(0)
+		times(1)
+		atLeast(2)
+		atMost(7)
+		never()*/
+		
+		verify(databaseService).lookup(isbn);
+		verify(webService).lookup(anyString());
 	}
 
 }
