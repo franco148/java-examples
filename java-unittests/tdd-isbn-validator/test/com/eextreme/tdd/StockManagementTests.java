@@ -3,6 +3,8 @@ package com.eextreme.tdd;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.mockito.Mockito;
+
 import static org.mockito.Mockito.*;
 
 public class StockManagementTests {
@@ -25,6 +27,24 @@ public class StockManagementTests {
 				return null;
 			}
 		};
+		
+		StockManager stockManager = new StockManager();
+		stockManager.setWebService(testWebService);
+		stockManager.setDbService(testDbService);
+		
+		String isbn = "0140177396";		
+		String locatorCode = stockManager.getLocatorCode(isbn);
+		assertEquals("7396J4", locatorCode);
+	}
+	
+	@Test
+	public void testCanGetACorrectLocatorCode_WithMockito() {
+				
+		ExternalIsbnDataService testWebService = mock(ExternalIsbnDataService.class);
+		when(testWebService.lookup(anyString())).thenReturn(new Book("0140177396", "Of Mice and Men", "J. Steinbeck"));
+		
+		ExternalIsbnDataService testDbService = mock(ExternalIsbnDataService.class);
+		when(testDbService.lookup(anyString())).thenReturn(null);
 		
 		StockManager stockManager = new StockManager();
 		stockManager.setWebService(testWebService);
