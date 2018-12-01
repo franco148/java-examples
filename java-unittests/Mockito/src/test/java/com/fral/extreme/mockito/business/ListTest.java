@@ -1,6 +1,6 @@
 package com.fral.extreme.mockito.business;
 
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;
@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
 public class ListTest {
@@ -76,6 +77,6 @@ public class ListTest {
 		Object firstElement = listMock.get(0);
 		
 		//Then
-		assertThat(firstElement, is("eXtremeDevelopment"));
+		assertThat(firstElement, CoreMatchers.<Object>is("eXtremeDevelopment"));
 	}
 }
