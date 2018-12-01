@@ -13,3 +13,9 @@
  
  These are even lighter weight versions of stubs, the use case for a fake or dummy.
  Is normally when you need to override something but you have no interest in the thing that you are overriding.
+ 
+ 
+ ### Tautologies
+ - A tautology is when you are using the same logic in your test as in your implementation.
+ 
+ 
