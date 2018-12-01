@@ -53,3 +53,5 @@ hs_err_pid*
 java-spring/05-spring-feign-drive/.mvn/wrapper/maven-wrapper.jar
 java-spring/05-spring-feign-drive/.mvn/wrapper/maven-wrapper.properties
 java-unittests/JUnit4/target/classes/META-INF/MANIFEST.MF
+java-unittests/handling-legacy-code/.mvn/wrapper/maven-wrapper.jar
+java-unittests/handling-legacy-code/.mvn/
