@@ -16,6 +16,16 @@ import com.eextreme.tdd.legacycode.LoanRepository;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * Spy: Means that you do not actually replace the object, you still use the real underlying object but you
+ * stub one of more of its methods.
+ * 
+ * In other words by using spying we can replace the method of an object but leave the left of the object.
+ * It creates an instance of the object, but we are able to override one of its methods.
+ * 
+ * @author Franco
+ *
+ */
 public class RepaymentAmountTests {
 	
 	@Spy
