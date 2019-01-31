@@ -18,8 +18,8 @@ public class StringTest {
     }
 
     @BeforeEach
-    void beforeEach() {
-        System.out.println("Before each...");
+    void beforeEach(TestInfo info) {
+        System.out.println("Before each..." + info.getDisplayName());
     }
 
     @AfterEach
