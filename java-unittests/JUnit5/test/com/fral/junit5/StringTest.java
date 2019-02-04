@@ -44,4 +44,11 @@ public class StringTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void length_exception() {
+        String str = null;
+//        int actualLength = str.length();
+        assertThrows(NullPointerException.class, ()-> str.length());
+    }
 }
