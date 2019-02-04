@@ -1,6 +1,8 @@
 package com.fral.junit5;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,5 +53,19 @@ public class StringTest {
         String str = null;
 //        int actualLength = str.length();
         assertThrows(NullPointerException.class, ()-> str.length());
+    }
+
+    @Test
+    public void length_greater_than_zero() {
+        assertTrue("ABCD".length() > 0);
+        assertTrue("ABC".length() > 0);
+        assertTrue("C".length() > 0);
+        assertTrue("DE".length() > 0);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"ABCD", "ABC", "C", "DE"})
+    public void length_greater_than_zero_parameterized(String str) {
+        assertTrue(str.length() > 0);
     }
 }
