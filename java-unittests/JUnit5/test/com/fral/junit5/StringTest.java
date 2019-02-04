@@ -2,6 +2,7 @@ package com.fral.junit5;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,5 +68,18 @@ public class StringTest {
     @ValueSource(strings = {"ABCD", "ABC", "C", "DE"})
     public void length_greater_than_zero_parameterized(String str) {
         assertTrue(str.length() > 0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { "abcde, ABCDE", "ab, AB", "'', ''", "abcdefg, ABCDEFG" })
+    public void uppercase_test(String word, String capitalizedWord) {
+        assertEquals(capitalizedWord, word.toUpperCase());
+//        assertEquals("DEF", "def".toUpperCase());
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = { "abcde, 5", "ab, 2", "'', 0", "abcdefg, 7" })
+    public void length_test(String word, int strLength) {
+        assertEquals(strLength, word.length());
     }
 }
