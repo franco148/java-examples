@@ -46,6 +46,7 @@ public class StringTest {
     }
 
     @Test
+    @DisplayName("When string is null, throw an exception")
     public void length_exception() {
         String str = null;
 //        int actualLength = str.length();
