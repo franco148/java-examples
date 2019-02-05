@@ -92,6 +92,7 @@ public class StringTest {
     }
 
     @Test
+    @Disabled //@Ignore in JUnit 4 //Disabled annotation can be used in class level as well.
     public void performance_test() {
         assertTimeout(Duration.ofSeconds(10), () -> {
             for (int i = 0; i < 1000000; i++) {
