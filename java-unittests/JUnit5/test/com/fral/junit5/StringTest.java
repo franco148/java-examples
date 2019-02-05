@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringTest {
@@ -87,5 +89,14 @@ public class StringTest {
     @RepeatedTest(10)
     public void contains_basic() {
         assertFalse("abcdefghijk".contains("lmn"));
+    }
+
+    @Test
+    public void performance_test() {
+        assertTimeout(Duration.ofSeconds(10), () -> {
+            for (int i = 0; i < 1000000; i++) {
+                System.out.println(i);
+            }
+        });
     }
 }
