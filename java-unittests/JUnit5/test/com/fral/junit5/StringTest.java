@@ -82,4 +82,10 @@ public class StringTest {
     public void length_test(String word, int strLength) {
         assertEquals(strLength, word.length());
     }
+
+    @Test
+    @RepeatedTest(10)
+    public void contains_basic() {
+        assertFalse("abcdefghijk".contains("lmn"));
+    }
 }
