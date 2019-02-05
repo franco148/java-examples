@@ -77,7 +77,7 @@ public class StringTest {
 //        assertEquals("DEF", "def".toUpperCase());
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0} length is {1}")
     @CsvSource(value = { "abcde, 5", "ab, 2", "'', 0", "abcdefg, 7" })
     public void length_test(String word, int strLength) {
         assertEquals(strLength, word.length());
