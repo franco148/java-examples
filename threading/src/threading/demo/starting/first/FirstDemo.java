@@ -8,11 +8,15 @@ package threading.demo.starting.first;
  *
  */
 class Runner extends Thread {
-	
+
+	public Runner(String name) {
+		super(name);
+	}
+
 	@Override
 	public void run() {
 		for (int i = 0; i < 10; i++) {
-			System.out.println("Hello " + i);
+			System.out.println(this.getName() + "Hello " + i);
 			
 			try {
 				Thread.sleep(500);
@@ -22,14 +26,14 @@ class Runner extends Thread {
 			}						
 		}
 		
-		System.out.println("Finished!!!...");
+		System.out.println(this.getName() + "Finished!!!...");
 	}
 }
 
 public class FirstDemo {
 	public static void main(String[] args) {
 		
-		Runner runner1 = new Runner();
+		Runner runner1 = new Runner("Thread 1: ");
 		/**
 		 * After call start() method, it runs in a special thread
 		 * but if we just call run() method, it is going to run
@@ -37,7 +41,7 @@ public class FirstDemo {
 		 */
 		runner1.start();
 		
-		Runner runner2 = new Runner();
+		Runner runner2 = new Runner("Thread 2: ");
 		runner2.start();
 	}
 }
