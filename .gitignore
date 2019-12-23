@@ -7,6 +7,12 @@
 # BlueJ files
 *.ctxt
 
+
+java-redis/\.settings/
+java-world/.idea/.name
+java-world/.idea/
+java-world/*.iml
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -55,3 +61,4 @@ java-spring/05-spring-feign-drive/.mvn/wrapper/maven-wrapper.properties
 java-unittests/JUnit4/target/classes/META-INF/MANIFEST.MF
 java-unittests/handling-legacy-code/.mvn/wrapper/maven-wrapper.jar
 java-unittests/handling-legacy-code/.mvn/
+
