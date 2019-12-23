@@ -1,9 +1,64 @@
+# Compiled class file
+*.class
 
-java-redis/\.classpath
+# Log file
+*.log
 
-java-redis/\.project
+# BlueJ files
+*.ctxt
+
 
 java-redis/\.settings/
 java-world/.idea/.name
 java-world/.idea/
 java-world/*.iml
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+### Inner Projects ###
+*mvnw
+*.cmd
+java-spring/05-spring-feign-drive/.mvn/wrapper/maven-wrapper.jar
+java-spring/05-spring-feign-drive/.mvn/wrapper/maven-wrapper.properties
+java-unittests/JUnit4/target/classes/META-INF/MANIFEST.MF
+java-unittests/handling-legacy-code/.mvn/wrapper/maven-wrapper.jar
+java-unittests/handling-legacy-code/.mvn/
+
