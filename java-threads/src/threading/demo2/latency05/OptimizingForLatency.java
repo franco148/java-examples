@@ -1,4 +1,4 @@
-package threading.demo2.latency;
+package threading.demo2.latency05;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
