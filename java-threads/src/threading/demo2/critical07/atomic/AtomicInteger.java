@@ -2,6 +2,12 @@ package threading.demo2.critical07.atomic;
 
 /**
  * Atomic Integers & Lock Free E-Commerce
+ *
+ * Atomic Operation
+ * - An operation or a set of operations is considered atomic, if it appears to the rest of the system as
+ * if it occurred at once.
+ * - Single  step - "all or nothing"
+ *
  */
 public class AtomicInteger {
 
