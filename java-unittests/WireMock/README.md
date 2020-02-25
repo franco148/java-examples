@@ -28,7 +28,18 @@
   - Network fault simulation is not possible
   - Testing not equivalent to interacting with production environment
 
+# WebClient vs RestTemplate
+#### WebClient
+- Rest API Client
+- Spring Webflux
+- Functional Style API
+- Build Synchronous and Asynchronous Rest Clients
 
+#### RestTemplate
+- Rest API Client
+- Spring Web
+- Imperatie Style API
+- Build only Synchronous Clients
 
 
 
