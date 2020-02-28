@@ -1,4 +1,5 @@
-# What is WireMock
+# WIREMOCK
+### What is WireMock
 - WireMock is a HTTP API simulator or HTTP Mock Web Server
 - Configure N number of Stubs programmatically
 - What is a Stub in WireMock context?
@@ -16,7 +17,7 @@
 
 
 
-# WIREMOCK VS MOCKITO
+### WIREMOCK VS MOCKITO
 - WireMock provides simulation to the actual service. (Includes the whole REST Services)
   - WebServer
   - Real HTTP
@@ -28,7 +29,7 @@
   - Network fault simulation is not possible
   - Testing not equivalent to interacting with production environment
 
-# WebClient vs RestTemplate
+### WebClient vs RestTemplate
 #### WebClient
 - Rest API Client
 - Spring Webflux
