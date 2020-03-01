@@ -2,9 +2,16 @@ package com.fral.wiremock.service;
 
 import com.fral.wiremock.dto.Movie;
 import com.fral.wiremock.exception.MovieErrorResponse;
+import com.github.jenspiegsa.wiremockextension.ConfigureWireMock;
+import com.github.jenspiegsa.wiremockextension.InjectServer;
+import com.github.jenspiegsa.wiremockextension.WireMockExtension;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
+import com.github.tomakehurst.wiremock.core.Options;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -13,10 +20,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+
+@ExtendWith(WireMockExtension.class)
 class MoviesRestClientTest {
 
     MoviesRestClient moviesRestClient;
     WebClient webClient;
+
+    @InjectServer
+    WireMockServer wireMockServer;
+
+    @ConfigureWireMock
+    Options options = wireMockConfig().port(9191)
+                                      .notifier(new ConsoleNotifier(true));
 
     @BeforeEach
     void setUp() {
