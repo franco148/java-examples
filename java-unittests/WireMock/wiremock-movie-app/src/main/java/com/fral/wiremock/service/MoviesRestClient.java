@@ -53,6 +53,7 @@ public class MoviesRestClient {
     }
 
     public Movie retrieveMovieById(Integer movieId) {
+
         String movieByIdURL =  MoviesAppConstants.MOVIE_BY_ID_PATH_PARAM_V1;
         Movie movie;
         try {

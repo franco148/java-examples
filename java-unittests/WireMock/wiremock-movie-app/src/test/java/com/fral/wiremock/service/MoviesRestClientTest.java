@@ -1,9 +1,12 @@
 package com.fral.wiremock.service;
 
 import com.fral.wiremock.dto.Movie;
+import com.fral.wiremock.exception.MovieErrorResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.List;
 
@@ -29,5 +32,27 @@ class MoviesRestClientTest {
 
         // Then
         assertTrue(moviesList.size() > 0);
+    }
+
+    @Test
+    void retrieveMovieById() {
+        // Given
+        Integer movieId = 1;
+
+        // When
+        Movie movie = moviesRestClient.retrieveMovieById(movieId);
+
+        // Then
+        assertEquals("Batman Begins", movie.getName());
+    }
+
+    @Test
+    void retrieveMovieById_NotFound() {
+        // Given
+        Integer movieId = 100;
+
+        // Then
+//        Assertions.assertThrows(WebClientResponseException.class, () -> moviesRestClient.retrieveMovieById(movieId));
+        Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.retrieveMovieById(movieId));
     }
 }
