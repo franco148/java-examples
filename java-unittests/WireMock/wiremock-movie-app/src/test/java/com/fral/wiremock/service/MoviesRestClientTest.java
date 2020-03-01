@@ -55,4 +55,25 @@ class MoviesRestClientTest {
 //        Assertions.assertThrows(WebClientResponseException.class, () -> moviesRestClient.retrieveMovieById(movieId));
         Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.retrieveMovieById(movieId));
     }
+
+    @Test
+    void retrieveMovieByName() {
+        // Given
+        String movieName = "Avengers";
+
+        // When
+        List<Movie> movieList = moviesRestClient.retrieveMovieByName(movieName);
+
+        // Then
+        assertEquals(4, movieList.size());
+    }
+
+    @Test
+    void retrieveMovieByName_NotFound() {
+        // Given
+        String movieName = "ABC";
+
+        // Then
+        Assertions.assertThrows(MovieErrorResponse.class, ()-> moviesRestClient.retrieveMovieByName(movieName));
+    }
 }
