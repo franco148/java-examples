@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -96,5 +97,27 @@ class MoviesRestClientTest {
 
         // Then
         Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.retrieveMovieByYear(year));
+    }
+
+    @Test
+    void addNewMovie() {
+        // Given
+        Movie movie = new Movie(null, "Toys Story 4", 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+
+        // When
+        Movie addedMovie = moviesRestClient.addNewMovie(movie);
+
+        // Then
+        assertNotNull(addedMovie.getMovie_id());
+    }
+
+    @Test
+    void addNewMovie_BadRequest() {
+        // Given
+        Movie movie = new Movie(null, null, 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+
+        // Then
+        String expectedErrorMessage = "Please pass all the input fields : [name]";
+        Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.addNewMovie(movie), expectedErrorMessage);
     }
 }
