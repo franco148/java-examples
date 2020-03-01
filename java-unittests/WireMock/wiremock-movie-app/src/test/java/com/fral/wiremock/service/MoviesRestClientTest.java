@@ -145,4 +145,27 @@ class MoviesRestClientTest {
         // Then
         Assertions.assertThrows(MovieErrorResponse.class, ()->moviesRestClient.updateMovie(movieId, movie));
     }
+
+    @Test
+    void deleteMovieById() {
+        // Given
+        Movie movie = new Movie(null, "Toys Story 5", 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+        Movie addedMovie = moviesRestClient.addNewMovie(movie);
+
+        // When
+        String responseMessage = moviesRestClient.deleteMovieById(addedMovie.getMovie_id());
+
+        // Then
+        String expectedErrorMessage = "Movie Deleted Successfully";
+        assertEquals(expectedErrorMessage, responseMessage);
+    }
+
+    @Test
+    void deleteMovieById_NotFound() {
+        // Given
+        Long id = 100L;
+
+        // Then
+        Assertions.assertThrows(MovieErrorResponse.class, ()->moviesRestClient.deleteMovieById(id));
+    }
 }

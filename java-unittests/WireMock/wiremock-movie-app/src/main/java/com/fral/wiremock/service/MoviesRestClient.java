@@ -167,7 +167,7 @@ public class MoviesRestClient {
         return updatedMovie;
     }
 
-    public String deleteMovieById(Integer movieId) {
+    public String deleteMovieById(Long movieId) {
 
        String response;
         try {
