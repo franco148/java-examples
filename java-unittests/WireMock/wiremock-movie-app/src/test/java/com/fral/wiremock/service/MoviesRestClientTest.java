@@ -120,4 +120,29 @@ class MoviesRestClientTest {
         String expectedErrorMessage = "Please pass all the input fields : [name]";
         Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.addNewMovie(movie), expectedErrorMessage);
     }
+
+    @Test
+    void updateMovie() {
+        // Given
+        Integer movieId = 3;
+        String cast = "ABC";
+        Movie movie = new Movie(null, null, null, cast, null);
+
+        // When
+        Movie updatedMovie = moviesRestClient.updateMovie(movieId, movie);
+
+        // Then
+        assertTrue(updatedMovie.getCast().contains(cast));
+    }
+
+    @Test
+    void updateMovie_NotFound() {
+        // Given
+        Integer movieId = 103;
+        String cast = "ABC";
+        Movie movie = new Movie(null, null, null, cast, null);
+
+        // Then
+        Assertions.assertThrows(MovieErrorResponse.class, ()->moviesRestClient.updateMovie(movieId, movie));
+    }
 }
