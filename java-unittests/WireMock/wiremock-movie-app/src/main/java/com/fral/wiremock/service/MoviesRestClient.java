@@ -27,22 +27,29 @@ public class MoviesRestClient {
      * @return
      */
     public List<Movie> retrieveAllMovies() {
-        String getAllMoviesUrl = MoviesAppConstants.GET_ALL_MOVIES_V1;
-        List<Movie> movieList;
-        try {
-            movieList = webClient.get().uri(getAllMoviesUrl)
-                    .retrieve() // actual call is made to the api
-                    .bodyToFlux(Movie.class) //body is converted to flux(Represents multiple items)
-                    .collectList() // collecting the httpResponse as a list\
-                    .block(); // This call makes the Webclient to behave as a synchronous client.
-        } catch (WebClientResponseException ex) {
-            log.error("WebClientResponseException - Error Message is : {} ", ex, ex.getResponseBodyAsString());
-            throw new MovieErrorResponse(ex.getStatusText(), ex);
-        } catch (Exception ex) {
-            log.error("Exception - The Error Message is {} ", ex.getMessage());
-            throw new MovieErrorResponse(ex);
-        }
-        return movieList;
+
+        return webClient.get().uri(MoviesAppConstants.GET_ALL_MOVIES_V1)
+                .retrieve()
+                .bodyToFlux(Movie.class)
+                .collectList()
+                .block();
+
+//        String getAllMoviesUrl = MoviesAppConstants.GET_ALL_MOVIES_V1;
+//        List<Movie> movieList;
+//        try {
+//            movieList = webClient.get().uri(getAllMoviesUrl)
+//                    .retrieve() // actual call is made to the api
+//                    .bodyToFlux(Movie.class) //body is converted to flux(Represents multiple items)
+//                    .collectList() // collecting the httpResponse as a list\
+//                    .block(); // This call makes the Webclient to behave as a synchronous client.
+//        } catch (WebClientResponseException ex) {
+//            log.error("WebClientResponseException - Error Message is : {} ", ex, ex.getResponseBodyAsString());
+//            throw new MovieErrorResponse(ex.getStatusText(), ex);
+//        } catch (Exception ex) {
+//            log.error("Exception - The Error Message is {} ", ex.getMessage());
+//            throw new MovieErrorResponse(ex);
+//        }
+//        return movieList;
     }
 
     public Movie retrieveMovieById(Integer movieId) {

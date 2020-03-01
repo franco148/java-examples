@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 }
+apply plugin: 'java'
 
 group = 'com.fral.wiremock'
 version = '0.0.1-SNAPSHOT'
@@ -10,8 +11,12 @@ repositories {
 	mavenCentral()
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
-	//webclient-dependencies
+    //webclient-dependencies
     implementation 'org.springframework:spring-webflux:5.1.8.RELEASE'
     implementation 'io.projectreactor.netty:reactor-netty:0.8.9.RELEASE'
 
@@ -31,6 +36,4 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.5.1")
 }
 
-test {
-	useJUnitPlatform()
-}
+
