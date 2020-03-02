@@ -89,6 +89,12 @@ class MoviesRestClientTest {
     @Test
     void retrieveMovieById() {
         // Given
+//        stubFor(get(urlPathEqualTo("/movieservice/v1/movie/1"))
+        stubFor(get(urlPathMatching("/movieservice/v1/movie/[0-9]"))
+                        .willReturn(WireMock.aResponse()
+                                .withStatus(HttpStatus.OK.value())
+                                .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                                .withBodyFile("movie.json")));
         Integer movieId = 1;
 
         // When
