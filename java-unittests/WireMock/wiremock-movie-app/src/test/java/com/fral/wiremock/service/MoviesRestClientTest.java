@@ -1,5 +1,6 @@
 package com.fral.wiremock.service;
 
+import com.fral.wiremock.constants.MoviesAppConstants;
 import com.fral.wiremock.dto.Movie;
 import com.fral.wiremock.exception.MovieErrorResponse;
 import com.github.jenspiegsa.wiremockextension.ConfigureWireMock;
@@ -57,6 +58,24 @@ class MoviesRestClientTest {
                 .withStatus(HttpStatus.OK.value())
                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .withBodyFile("all-movies.json"))
+        );
+
+        // When
+        List<Movie> moviesList = moviesRestClient.retrieveAllMovies();
+        System.out.println("MoviesList: " + moviesList);
+
+        // Then
+        assertTrue(moviesList.size() > 0);
+    }
+
+    @Test
+    void retrieveAllMovies_MatchesUrl() {
+        // Given
+        stubFor(get(urlPathEqualTo(MoviesAppConstants.GET_ALL_MOVIES_V1))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("all-movies.json"))
         );
 
         // When
