@@ -10,6 +10,7 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
 import com.github.tomakehurst.wiremock.core.Options;
+import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,8 @@ class MoviesRestClientTest {
 
     @ConfigureWireMock
     Options options = wireMockConfig().port(9191)
-                                      .notifier(new ConsoleNotifier(true));
+                                      .notifier(new ConsoleNotifier(true))
+                                      .extensions(new ResponseTemplateTransformer(true));
 
     @BeforeEach
     void setUp() {
@@ -102,6 +104,24 @@ class MoviesRestClientTest {
 
         // Then
         assertEquals("Batman Begins", movie.getName());
+    }
+
+    @Test
+    void retrieveMovieById_responseTemplating() {
+        // Given
+        stubFor(get(urlPathMatching("/movieservice/v1/movie/[0-9]"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("movie-template.json")));
+        Integer movieId = 9;
+
+        // When
+        Movie movie = moviesRestClient.retrieveMovieById(movieId);
+
+        // Then
+        assertEquals("Batman Begins", movie.getName());
+        assertEquals(movieId, movie.getMovie_id().intValue());
     }
 
     @Test
