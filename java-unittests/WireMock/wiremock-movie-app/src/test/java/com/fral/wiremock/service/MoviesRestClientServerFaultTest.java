@@ -111,4 +111,28 @@ public class MoviesRestClientServerFaultTest {
         assertThrows(MovieErrorResponse.class, ()->moviesRestClient.retrieveAllMovies());
 
     }
+
+    @Test
+    void retrieveAllMovies_fixedDelay() {
+
+        //given
+        stubFor(get(anyUrl())
+                .willReturn(ok().withFixedDelay(10000)));
+
+        //then
+        assertThrows(MovieErrorResponse.class, ()->moviesRestClient.retrieveAllMovies());
+
+    }
+
+    @Test
+    void retrieveAllMovies_RandomDelay() {
+
+        //given
+        stubFor(get(anyUrl())
+                .willReturn(ok().withUniformRandomDelay(6000,10000)));
+
+        //then
+        assertThrows(MovieErrorResponse.class, ()->moviesRestClient.retrieveAllMovies());
+
+    }
 }
