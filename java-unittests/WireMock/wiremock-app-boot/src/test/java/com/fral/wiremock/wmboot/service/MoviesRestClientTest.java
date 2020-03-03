@@ -50,4 +50,22 @@ class MoviesRestClientTest {
         // Then
         assertTrue(moviesList.size() > 0);
     }
+
+    @Test
+    void retrieveMovieById_responseTemplating() {
+        // Given
+        stubFor(get(urlPathMatching("/movieservice/v1/movie/[0-9]"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("movie-template.json")));
+        Integer movieId = 9;
+
+        // When
+        Movie movie = moviesRestClient.retrieveMovieById(movieId);
+
+        // Then
+        assertEquals("Batman Begins", movie.getName());
+        assertEquals(movieId, movie.getMovie_id().intValue());
+    }
 }
