@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * https://rieckpil.de/spring-boot-integration-tests-with-wiremock-and-junit-5/
  * https://www.baeldung.com/junit-5-runwith
  */
-//@ExtendWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureWireMock(port = 9191) //With this configuration the tests will not support response templating.
 @TestPropertySource(properties = {
