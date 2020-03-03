@@ -127,6 +127,11 @@ class MoviesRestClientTest {
     @Test
     void retrieveMovieById_NotFound() {
         // Given
+        stubFor(get(urlPathMatching("/movieservice/v1/movie/[0-9]+"))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.NOT_FOUND.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("404-movieId.json")));
         Integer movieId = 100;
 
         // Then
