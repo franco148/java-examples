@@ -309,6 +309,12 @@ class MoviesRestClientTest {
         Integer movieId = 3;
         String cast = "ABC";
         Movie movie = new Movie(null, null, null, cast, null);
+        stubFor(put(urlPathMatching("/movieservice/v1/movie/[0-9]+"))
+                .withRequestBody(matchingJsonPath(("$.cast"), containing(cast)))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("updatemovie-template.json")));
 
         // When
         Movie updatedMovie = moviesRestClient.updateMovie(movieId, movie);
@@ -323,6 +329,11 @@ class MoviesRestClientTest {
         Integer movieId = 103;
         String cast = "ABC";
         Movie movie = new Movie(null, null, null, cast, null);
+        stubFor(put(urlPathMatching("/movieservice/v1/movie/[0-9]+"))
+                .withRequestBody(matchingJsonPath(("$.cast"), containing(cast)))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.NOT_FOUND.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)));
 
         // Then
         Assertions.assertThrows(MovieErrorResponse.class, ()->moviesRestClient.updateMovie(movieId, movie));
