@@ -219,6 +219,11 @@ class MoviesRestClientTest {
     void retrieveMovieByYear() {
         // Given
         Integer year = 2012;
+        stubFor(get(urlEqualTo(MoviesAppConstants.MOVIE_BY_YEAR_QUERY_PARAM_V1+"?year="+year))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("year-template.json")));
 
         // When
         List<Movie> movieList = moviesRestClient.retrieveMovieByYear(year);
@@ -231,6 +236,12 @@ class MoviesRestClientTest {
     void retrieveMovieByYear_NotFound() {
         // Given
         Integer year = 1950;
+        stubFor(get(urlEqualTo(MoviesAppConstants.MOVIE_BY_YEAR_QUERY_PARAM_V1+"?year="+year))
+                .withQueryParam("year", equalTo(year.toString()))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.NOT_FOUND.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("404-movieyear.json")));
 
         // Then
         Assertions.assertThrows(MovieErrorResponse.class, () -> moviesRestClient.retrieveMovieByYear(year));
