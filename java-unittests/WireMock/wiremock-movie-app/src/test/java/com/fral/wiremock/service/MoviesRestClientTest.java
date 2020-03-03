@@ -50,6 +50,9 @@ class MoviesRestClientTest {
 //        String baseUrl = "http://localhost:8081";
         webClient = WebClient.create(baseUrl);
         moviesRestClient = new MoviesRestClient(webClient);
+
+        // Proxy
+        stubFor(any(anyUrl()).willReturn(aResponse().proxiedFrom("http://localhost:8081")));
     }
 
     @Test
@@ -413,6 +416,12 @@ class MoviesRestClientTest {
 
     }
 
+    /**
+     * What is selective proxying?
+     * - WireMock reverse proxies the actual service for some endpoints.
+     *
+     * - New functionalities to the existing service that is not yet implemented.
+     */
 //    @Test
     void deleteMovieByName_selectiveproxying() {
         //given
