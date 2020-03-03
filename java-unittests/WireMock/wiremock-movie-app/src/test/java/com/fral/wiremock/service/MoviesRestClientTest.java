@@ -251,6 +251,13 @@ class MoviesRestClientTest {
     void addNewMovie() {
         // Given
         Movie movie = new Movie(null, "Toys Story 4", 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+        stubFor(post(urlPathEqualTo(MoviesAppConstants.ADD_MOVIE_V1))
+                .withRequestBody(matchingJsonPath(("$.name"),equalTo("Toys Story 4")))
+                .withRequestBody(matchingJsonPath(("$.cast"), containing("Tom")))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("add-movie.json")));
 
         // When
         Movie addedMovie = moviesRestClient.addNewMovie(movie);
@@ -260,9 +267,36 @@ class MoviesRestClientTest {
     }
 
     @Test
+    void addMovie_responseTemplating() {
+        //given
+        Movie movie = new Movie(null, "Toys Story 4", 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+        stubFor(post(urlPathEqualTo(MoviesAppConstants.ADD_MOVIE_V1))
+                // .withQueryParam("movie_name", equalTo(movieName) )
+                .withRequestBody(matchingJsonPath(("$.name"),equalTo("Toys Story 4")))
+                .withRequestBody(matchingJsonPath(("$.cast"), containing("Tom")))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.OK.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("add-movie-template.json")));
+
+        //when
+        Movie addedMovie = moviesRestClient.addNewMovie(movie);
+        System.out.println(addedMovie);
+
+        //then
+        assertTrue(addedMovie.getMovie_id() != null);
+    }
+
+    @Test
     void addNewMovie_BadRequest() {
         // Given
         Movie movie = new Movie(null, null, 2019, "Tom Hanks, Tim Allen", LocalDate.of(2019, 06, 20));
+        stubFor(post(urlPathEqualTo(MoviesAppConstants.ADD_MOVIE_V1))
+                .withRequestBody(matchingJsonPath(("$.cast"), containing("Tom")))
+                .willReturn(WireMock.aResponse()
+                        .withStatus(HttpStatus.BAD_REQUEST.value())
+                        .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withBodyFile("400-invalid-input.json")));
 
         // Then
         String expectedErrorMessage = "Please pass all the input fields : [name]";
