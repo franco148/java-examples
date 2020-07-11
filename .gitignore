@@ -62,3 +62,18 @@ java-unittests/JUnit4/target/classes/META-INF/MANIFEST.MF
 java-unittests/handling-legacy-code/.mvn/wrapper/maven-wrapper.jar
 java-unittests/handling-legacy-code/.mvn/
 
+### Java Kafka POCs ###
+java-kafka/spring-kafka-poc/.gradle/
+java-kafka/spring-kafka-poc/gradle/
+java-kafka/spring-kafka-poc/gradlew
+java-kafka/spring-kafka-poc/gradlew.bat
+
+
+
+
+
+
+
+
+
+
