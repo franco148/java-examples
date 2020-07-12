@@ -34,6 +34,10 @@ public class MessageConsumer {
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, "msgconsumer"); //Any name
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //earliest, latest
+        // Here configuring (overriding) the MAX POLL INTERVAL
+//        propsMap.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 5000);
+        // If we restart the consumer, it will read again the messages written from 10 seconds ago.
+//        propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 10000);
 
         return propsMap;
     }
