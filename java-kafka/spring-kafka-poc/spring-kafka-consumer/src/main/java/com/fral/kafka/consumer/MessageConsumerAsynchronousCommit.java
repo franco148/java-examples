@@ -14,15 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MessageConsumerSynchronousCommit {
+public class MessageConsumerAsynchronousCommit {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MessageConsumerSynchronousCommit.class);
+	private static final Logger logger = LoggerFactory.getLogger(MessageConsumerAsynchronousCommit.class);
 
     KafkaConsumer<String, String> kafkaConsumer;
     String topicName = "test-topic-replicated";
 
 
-    public MessageConsumerSynchronousCommit(Map<String, Object> propsMap) {
+    public MessageConsumerAsynchronousCommit(Map<String, Object> propsMap) {
         kafkaConsumer = new KafkaConsumer<>(propsMap);
     }
 
@@ -59,8 +59,15 @@ public class MessageConsumerSynchronousCommit {
             	
             	// This part of the code is after added ENABLE_AUTO_COMMIT_CONFIG
             	if (consumerRecords.count() > 0) {
-					kafkaConsumer.commitSync(); // Committed the last record offset returned by the poll.
-					logger.info("Offset Committed...");
+					//kafkaConsumer.commitAsync(); // Committed the last record offset returned by the poll.
+            		kafkaConsumer.commitAsync((offsets, exception) -> {
+            			if (exception != null) {
+							logger.error("Exception committing the offsets {} ", exception.getMessage());
+						} else {
+							logger.info("Offset Committed...");
+						}
+            		});
+					//logger.info("Offset Committed...");
 				}
 			}
 		} catch (CommitFailedException e) {
@@ -74,7 +81,7 @@ public class MessageConsumerSynchronousCommit {
 
     public static void main(String[] args) {
 
-        MessageConsumerSynchronousCommit messageConsumer = new MessageConsumerSynchronousCommit(buildConsumerProperties());
+        MessageConsumerAsynchronousCommit messageConsumer = new MessageConsumerAsynchronousCommit(buildConsumerProperties());
         messageConsumer.pollKafka();
         
         /**
