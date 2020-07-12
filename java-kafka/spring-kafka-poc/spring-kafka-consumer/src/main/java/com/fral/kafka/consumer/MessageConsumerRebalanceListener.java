@@ -40,12 +40,16 @@ public class MessageConsumerRebalanceListener {
 //        propsMap.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 5000);
         // If we restart the consumer, it will read again the messages written from 10 seconds ago.
 //        propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 10000);
+        
+        propsMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 
         return propsMap;
     }
 
     public void pollKafka() {
-        kafkaConsumer.subscribe(List.of(topicName), new MessageRebalanceListener());
+    	// When using a MessageRebalanceListener and sending it a kafka reference we will need to
+    	// ENABLE the configuration regarding to ENABLE_AUTO_COMMIT_CONFIG
+        kafkaConsumer.subscribe(List.of(topicName), new MessageRebalanceListener(kafkaConsumer));
         Duration timeOutDuration = Duration.of(100, ChronoUnit.MILLIS);
         
         try {
@@ -55,7 +59,8 @@ public class MessageConsumerRebalanceListener {
             		String infoMessage = "Consumer Record Key is {} and the value is {} and the partition {}";
             		logger.info(infoMessage, record.key(), record.value(), record.partition());
             	});
-			}
+            	kafkaConsumer.commitSync();
+			}        	
 		} catch (Exception e) {
 			logger.error("Exception in pollKafka : " + e.getMessage());
 		} finally {
