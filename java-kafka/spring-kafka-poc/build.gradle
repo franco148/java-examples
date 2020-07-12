@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+allprojects {
+    group 'com.fral.pocs'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    sourceCompatibility = 11
+    apply plugin: 'java'
+
+    dependencies {
+        implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.5.0'
+        implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}
+
+
