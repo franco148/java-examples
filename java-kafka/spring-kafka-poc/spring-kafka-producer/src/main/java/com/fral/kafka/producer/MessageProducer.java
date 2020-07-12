@@ -45,6 +45,8 @@ public class MessageProducer {
         propsMap.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         propsMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         propsMap.put(ProducerConfig.ACKS_CONFIG, "all");
+        propsMap.put(ProducerConfig.RETRIES_CONFIG, 10); //How many times
+        propsMap.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 3000); //Every 3 seconds
 
         return propsMap;
     }
