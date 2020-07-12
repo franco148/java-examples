@@ -1,3 +1,4 @@
 rootProject.name = 'spring-kafka-poc'
 include 'spring-kafka-producer'
+include 'spring-kafka-consumer'
 
