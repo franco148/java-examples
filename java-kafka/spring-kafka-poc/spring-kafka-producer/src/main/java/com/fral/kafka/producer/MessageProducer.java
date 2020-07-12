@@ -35,6 +35,10 @@ public class MessageProducer {
 		}
     };
     
+    public void close(){
+        kafkaProducer.close();
+    }
+    
     public static Map<String, Object> propsMap() {
         Map<String, Object> propsMap = new HashMap<>();
         propsMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
