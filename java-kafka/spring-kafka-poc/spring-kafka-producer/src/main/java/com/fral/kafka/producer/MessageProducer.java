@@ -64,8 +64,9 @@ public class MessageProducer {
     public static void main(String[] args) throws InterruptedException {
 
         MessageProducer messageProducer = new MessageProducer(propsMap());
-//        messageProducer.publishMessageSync(null, "ABC");
-        messageProducer.publishMessageAsync(null, "EEEFFFCCC - Async");
-        Thread.sleep(3000);
+        messageProducer.publishMessageSync("1A", "ABC");
+        messageProducer.publishMessageSync("1A", "DEF");
+//        messageProducer.publishMessageAsync(null, "EEEFFFCCC - Async");
+//        Thread.sleep(3000);
     }
 }
