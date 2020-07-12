@@ -5,12 +5,16 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class MessageProducer {
+
+    private static final Logger logger = LoggerFactory.getLogger(MessageProducer.class);
 
     String topicName = "test-topic";
     KafkaProducer<String, String> kafkaProducer;
@@ -35,11 +39,11 @@ public class MessageProducer {
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, key, value);
         try {
             RecordMetadata recordMetadata = kafkaProducer.send(producerRecord).get();
-            System.out.println("partition " + recordMetadata.partition() + " , offset: " + recordMetadata.offset());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+//            System.out.println("partition " + recordMetadata.partition() + " , offset: " + recordMetadata.offset());
+            logger.info("Message {} sent successfully for the key {}", value, key);
+            logger.info("Published Message Offset is {} and the partition is {}", recordMetadata.offset(), recordMetadata.partition());
+        } catch (InterruptedException | ExecutionException e) {
+            logger.error("Exception in publishMessageSync : {}", e.getMessage());
         }
     }
 
