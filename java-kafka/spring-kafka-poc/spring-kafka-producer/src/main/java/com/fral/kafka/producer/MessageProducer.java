@@ -1,5 +1,6 @@
 package com.fral.kafka.producer;
 
+import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -26,6 +27,14 @@ public class MessageProducer {
 
 
 
+    Callback callback = (metadata, exception) -> {
+    	if (exception != null) {
+			logger.error("Error in Callback is {} ", exception.getMessage());
+		} else {
+			logger.info("Published Message Offset in Callback is {} and the partition is {}", metadata.offset(), metadata.partition());
+		}
+    };
+    
     public static Map<String, Object> propsMap() {
         Map<String, Object> propsMap = new HashMap<>();
         propsMap.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -33,6 +42,11 @@ public class MessageProducer {
         propsMap.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         return propsMap;
+    }
+    
+    public void publishMessageAsync(String key, String value) {
+    	ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, key, value);
+    	kafkaProducer.send(producerRecord, callback);
     }
 
     public void publishMessageSync(String key, String value) {
@@ -47,9 +61,11 @@ public class MessageProducer {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         MessageProducer messageProducer = new MessageProducer(propsMap());
-        messageProducer.publishMessageSync(null, "ABC");
+//        messageProducer.publishMessageSync(null, "ABC");
+        messageProducer.publishMessageAsync(null, "EEEFFFCCC - Async");
+        Thread.sleep(3000);
     }
 }
