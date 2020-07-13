@@ -13,15 +13,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MessageConsumer {
+public class MessageConsumer2 {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
+	private static final Logger logger = LoggerFactory.getLogger(MessageConsumer2.class);
 
     KafkaConsumer<String, String> kafkaConsumer;
     String topicName = "test-topic-replicated";
 
 
-    public MessageConsumer(Map<String, Object> propsMap) {
+    public MessageConsumer2(Map<String, Object> propsMap) {
         kafkaConsumer = new KafkaConsumer<>(propsMap);
     }
 
@@ -34,10 +34,6 @@ public class MessageConsumer {
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, "msgconsumer"); //Any name
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //earliest, latest
-        // Here configuring (overriding) the MAX POLL INTERVAL
-//        propsMap.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 5000);
-        // If we restart the consumer, it will read again the messages written from 10 seconds ago.
-//        propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, 10000);
 
         return propsMap;
     }
@@ -63,7 +59,7 @@ public class MessageConsumer {
 
     public static void main(String[] args) {
 
-        MessageConsumer messageConsumer = new MessageConsumer(buildConsumerProperties());
+        MessageConsumer2 messageConsumer = new MessageConsumer2(buildConsumerProperties());
         messageConsumer.pollKafka();
         
         /**

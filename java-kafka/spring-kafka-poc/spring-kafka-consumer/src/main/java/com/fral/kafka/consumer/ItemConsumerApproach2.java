@@ -3,9 +3,14 @@ package com.fral.kafka.consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fral.kafka.domain.Item;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -13,15 +18,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MessageConsumer {
+public class ItemConsumerApproach2 {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
+	private static final Logger logger = LoggerFactory.getLogger(ItemConsumerApproach2.class);
 
-    KafkaConsumer<String, String> kafkaConsumer;
-    String topicName = "test-topic-replicated";
+    KafkaConsumer<Integer, String> kafkaConsumer;
+    String topicName = "items";
+    ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public MessageConsumer(Map<String, Object> propsMap) {
+    public ItemConsumerApproach2(Map<String, Object> propsMap) {
         kafkaConsumer = new KafkaConsumer<>(propsMap);
     }
 
@@ -30,9 +36,9 @@ public class MessageConsumer {
         Map<String, Object> propsMap = new HashMap<>();
 
         propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093,localhost:9094");
-        propsMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        propsMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, IntegerDeserializer.class.getName());
         propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
-        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, "msgconsumer"); //Any name
+        propsMap.put(ConsumerConfig.GROUP_ID_CONFIG, "itemConsumer"); //Any name
         propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest"); //earliest, latest
         // Here configuring (overriding) the MAX POLL INTERVAL
 //        propsMap.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 5000);
@@ -48,10 +54,17 @@ public class MessageConsumer {
         
         try {
         	while (true) {
-        		ConsumerRecords<String, String> consumerRecords = kafkaConsumer.poll(timeOutDuration);
+        		ConsumerRecords<Integer, String> consumerRecords = kafkaConsumer.poll(timeOutDuration);
             	consumerRecords.forEach((record) -> {
             		String infoMessage = "Consumer Record Key is {} and the value is {} and the partition {}";
             		logger.info(infoMessage, record.key(), record.value(), record.partition());
+            		
+            		try {
+						Item item = objectMapper.readValue(record.value(), Item.class);
+						logger.info("Item : {} ", item);
+					} catch (JsonProcessingException e) {
+						logger.error("JsonProcessingException in pollKafka ", e);
+					}
             	});
 			}
 		} catch (Exception e) {
@@ -63,7 +76,7 @@ public class MessageConsumer {
 
     public static void main(String[] args) {
 
-        MessageConsumer messageConsumer = new MessageConsumer(buildConsumerProperties());
+        ItemConsumerApproach2 messageConsumer = new ItemConsumerApproach2(buildConsumerProperties());
         messageConsumer.pollKafka();
         
         /**
